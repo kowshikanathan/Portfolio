@@ -1,0 +1,132 @@
+/* ==========================================================================
+   APPROACH & METHODOLOGY — RECUEIL TWILIGHT SAPPHIRE GLASS THEME
+   Reference: https://recueil.framer.website/
+   ========================================================================== */
+
+.approach-section {
+  padding: 120px 0;
+  position: relative;
+  background: radial-gradient(ellipse at 50% 50%, rgba(89, 120, 160, 0.12) 0%, transparent 70%);
+}
+
+.approach-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+}
+
+/* Connecting line across desktop — Recueil Ice Blue */
+.approach-steps-grid::before {
+  content: '';
+  position: absolute;
+  top: 52px;
+  left: 60px;
+  right: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-ice) 0%, rgba(186, 230, 253, 0.35) 50%, rgba(255, 255, 255, 0.1) 100%);
+  z-index: 0;
+}
+
+.approach-step-card {
+  background: rgba(255, 255, 255, 0.05);
+  background-image: radial-gradient(87% 106% at 102.8% -35.7%, rgba(89, 120, 160, 0.22) 0%, rgba(36, 61, 107, 0.35) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all var(--transition-normal);
+}
+
+.approach-step-card:hover {
+  border-color: rgba(186, 230, 253, 0.35);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 16px rgba(186, 230, 253, 0.1);
+}
+
+.step-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.step-badge-number {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #192750;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  color: var(--accent-ice);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.approach-step-card:hover .step-badge-number {
+  border-color: var(--accent-ice);
+  background: rgba(186, 230, 253, 0.15);
+  box-shadow: 0 0 14px var(--accent-ice);
+}
+
+.step-icon-wrap {
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.approach-step-card:hover .step-icon-wrap {
+  color: var(--accent-ice);
+}
+
+.step-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.step-card-desc {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.step-meta-pill {
+  margin-top: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-ice);
+  background: rgba(186, 230, 253, 0.1);
+  border: 1px solid rgba(186, 230, 253, 0.25);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  align-self: flex-start;
+  font-weight: 600;
+}
+
+@media (max-width: 992px) {
+  .approach-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .approach-steps-grid::before {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .approach-steps-grid {
+    grid-template-columns: 1fr;
+  }
+}

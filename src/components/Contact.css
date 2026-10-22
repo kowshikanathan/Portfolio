@@ -1,0 +1,259 @@
+/* ==========================================================================
+   CONTACT — RECUEIL TWILIGHT SAPPHIRE GLASS THEME
+   Reference: https://recueil.framer.website/
+   ========================================================================== */
+
+.contact-section {
+  padding: 120px 0 80px;
+  position: relative;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+/* Left / Info Column */
+.contact-info-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-headline {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  margin-bottom: 20px;
+  line-height: 1.15;
+}
+
+.contact-headline-highlight {
+  display: block;
+  color: var(--accent-ice);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.contact-lead {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+}
+
+/* Interactive Direct Contact Cards — Recueil Glass Cards */
+.contact-links-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.contact-item-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: all var(--transition-fast);
+}
+
+.contact-item-card:hover {
+  border-color: rgba(186, 230, 253, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  transform: translateX(4px);
+}
+
+.contact-item-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.contact-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(186, 230, 253, 0.12);
+  border: 1px solid rgba(186, 230, 253, 0.25);
+  color: var(--accent-ice);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-item-type {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.contact-item-val {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.copy-email-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.copy-email-btn:hover {
+  background: #ffffff;
+  color: #16223b;
+  border-color: #ffffff;
+}
+
+.copy-email-btn.copied {
+  background: var(--accent-ice);
+  color: #16223b;
+  border-color: var(--accent-ice);
+  font-weight: 600;
+}
+
+/* Right / Form Column — Recueil Sapphire Glass Card */
+.contact-form-card {
+  background: rgba(255, 255, 255, 0.05);
+  background-image: radial-gradient(87% 106% at 102.8% -35.7%, rgba(89, 120, 160, 0.25) 0%, rgba(36, 61, 107, 0.4) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  position: relative;
+}
+
+.contact-form-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.contact-form-subtitle {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  background: rgba(16, 26, 49, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--accent-ice);
+  box-shadow: 0 0 16px rgba(186, 230, 253, 0.25);
+  background: rgba(16, 26, 49, 0.85);
+}
+
+.form-input.error, .form-textarea.error {
+  border-color: #f87171;
+}
+
+.form-error-msg {
+  font-size: 0.74rem;
+  color: #f87171;
+  margin-top: 6px;
+  font-family: var(--font-mono);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-submit-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 1rem;
+}
+
+/* Submission feedback notification */
+.submission-feedback-box {
+  background: rgba(186, 230, 253, 0.1);
+  border: 1px solid rgba(186, 230, 253, 0.25);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.feedback-headline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent-ice);
+}
+
+.feedback-body {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.feedback-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 992px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .contact-form-card {
+    padding: 30px 20px;
+  }
+}

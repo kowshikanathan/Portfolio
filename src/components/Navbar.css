@@ -1,0 +1,209 @@
+.navbar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  z-index: 1000;
+  transition: all var(--transition-normal);
+  padding: 14px 0;
+}
+
+.navbar-wrapper.scrolled {
+  background: rgba(25, 39, 72, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+  padding: 10px 0;
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.brand-text-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.brand-role {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Recueil Centered Floating Glass Pill Menu */
+.nav-center {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 5px 10px;
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.nav-link {
+  padding: 8px 16px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-radius: var(--radius-pill);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link.active {
+  color: var(--accent-ice);
+  font-weight: 600;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.availability-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(186, 230, 253, 0.08);
+  border: 1px solid rgba(186, 230, 253, 0.22);
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--accent-ice);
+  font-family: var(--font-mono);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent-ice);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-ice);
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+.nav-connect-btn {
+  padding: 8px 20px;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+/* Mobile Toggle */
+.mobile-toggle {
+  display: none;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.mobile-toggle:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(22, 35, 64, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 999;
+  flex-direction: column;
+  padding: 100px 30px 40px;
+  transition: all var(--transition-normal);
+}
+
+.mobile-menu-overlay.open {
+  display: flex;
+}
+
+.mobile-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.mobile-nav-link {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-nav-link:hover {
+  color: var(--accent-ice);
+}
+
+@media (max-width: 992px) {
+  .nav-center, .nav-connect-btn {
+    display: none;
+  }
+  .mobile-toggle {
+    display: flex;
+  }
+}
+
+@media (max-width: 576px) {
+  .availability-pill span.avail-text {
+    display: none;
+  }
+  .availability-pill {
+    padding: 6px 8px;
+  }
+}

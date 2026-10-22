@@ -1,0 +1,138 @@
+/* ==========================================================================
+   FOOTER — RECUEIL TWILIGHT SAPPHIRE GLASS THEME
+   Reference: https://recueil.framer.website/
+   ========================================================================== */
+
+.footer-wrapper {
+  background: #16223b;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 80px 0 40px;
+  position: relative;
+  z-index: 10;
+}
+
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 50px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.footer-brand-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.footer-brand-sub {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.footer-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-nav-link {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+  font-weight: 500;
+}
+
+.footer-nav-link:hover {
+  color: var(--accent-ice);
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-copyright {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.footer-social-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.social-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all var(--transition-fast);
+}
+
+.social-icon-btn:hover {
+  background: #ffffff;
+  color: #16223b;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(186, 230, 253, 0.3);
+}
+
+.back-to-top-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.back-to-top-btn:hover {
+  background: #ffffff;
+  color: #16223b;
+  border-color: #ffffff;
+  box-shadow: 0 4px 16px rgba(186, 230, 253, 0.3);
+}
+
+@media (max-width: 768px) {
+  .footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

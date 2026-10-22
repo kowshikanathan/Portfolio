@@ -1,0 +1,158 @@
+/* ==========================================================================
+   EXPERIENCE & JOURNEY — RECUEIL TWILIGHT SAPPHIRE GLASS THEME
+   Reference: https://recueil.framer.website/
+   ========================================================================== */
+
+.experience-section {
+  padding: 120px 0;
+  position: relative;
+}
+
+.timeline-container {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* Central glowing line — Recueil Ice Blue Gradient */
+.timeline-track-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 28px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-ice) 0%, rgba(186, 230, 253, 0.25) 80%, transparent 100%);
+}
+
+.timeline-items-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* Individual Timeline Item */
+.timeline-item {
+  display: flex;
+  position: relative;
+  padding-left: 70px;
+}
+
+/* Glowing Node on Timeline */
+.timeline-node-marker {
+  position: absolute;
+  left: 19px;
+  top: 26px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #192750;
+  border: 2px solid var(--accent-ice);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 0 12px rgba(186, 230, 253, 0.4);
+}
+
+.timeline-node-inner {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-ice);
+}
+
+/* Timeline Card — Recueil Frosted Glass Surface */
+.timeline-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  background-image: radial-gradient(87% 106% at 102.8% -35.7%, rgba(89, 120, 160, 0.22) 0%, rgba(36, 61, 107, 0.35) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  position: relative;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all var(--transition-normal);
+}
+
+.timeline-card:hover {
+  border-color: rgba(186, 230, 253, 0.35);
+  transform: translateX(6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 16px rgba(186, 230, 253, 0.1);
+}
+
+.timeline-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.timeline-org {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.timeline-role {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--accent-ice);
+  font-weight: 600;
+}
+
+.timeline-duration-badge {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+}
+
+.timeline-desc {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.timeline-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.timeline-skill-pill {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+@media (max-width: 768px) {
+  .timeline-track-line {
+    left: 14px;
+  }
+  .timeline-node-marker {
+    left: 5px;
+    top: 22px;
+  }
+  .timeline-item {
+    padding-left: 42px;
+  }
+  .timeline-card {
+    padding: 24px 20px;
+  }
+}

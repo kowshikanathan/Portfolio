@@ -1,0 +1,456 @@
+/* ==========================================================================
+   RECUEIL EDITORIAL HERO SECTION (DEEP TWILIGHT BLUE & GLASS UI)
+   Reference: https://recueil.framer.website/
+   ========================================================================== */
+
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: calc(var(--nav-height) + 50px) 0 80px;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+}
+
+/* Recueil Atmospheric Radial Glows */
+.hero-top-ambient {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 520px;
+  background: radial-gradient(50% 50% at 50% 0%, #4d638f 0%, rgba(42, 63, 106, 0) 95%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
+}
+
+.hero-ambient-glow {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 500px;
+  background: radial-gradient(ellipse at center, rgba(89, 120, 160, 0.22) 0%, rgba(36, 61, 107, 0.1) 50%, transparent 75%);
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+  animation: recueilPulseGlow 9s infinite ease-in-out;
+}
+
+.hero-subtle-glow-left {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(186, 230, 253, 0.08) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  animation: floatGentle 8s infinite ease-in-out;
+}
+
+.hero-subtle-glow-right {
+  position: absolute;
+  bottom: 25%;
+  right: 10%;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.07) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  animation: floatReverse 9s infinite ease-in-out;
+}
+
+/* Center Content Column */
+.hero-center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 1020px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Recueil Top Badge: Frosted Glass with Glowing Ice-Blue Dot */
+.hero-badge-recueil {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 6px 18px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 30px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), 0 0 12px rgba(186, 230, 253, 0.1);
+  animation: recueilBadgeEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.badge-ice-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-ice);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-ice), 0 0 16px var(--accent-ice);
+  animation: icePulse 2s infinite ease-in-out;
+}
+
+.badge-sparkle {
+  color: var(--accent-ice);
+}
+
+/* Recueil Headline with Source Serif 4 Italic Accent */
+.hero-headline-recueil {
+  font-family: var(--font-heading);
+  font-size: clamp(3.2rem, 7.2vw, 5.8rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  margin-bottom: 24px;
+  max-width: 980px;
+}
+
+.headline-block {
+  display: block;
+}
+
+.headline-block.line-1 {
+  animation: recueilFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.headline-block.line-2 {
+  animation: recueilFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+/* Recueil Signature Italic Serif Accent */
+.hero-headline-recueil .recueil-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: #ffffff;
+  text-shadow: 0 2px 24px rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.hero-headline-recueil .recueil-italic:hover {
+  transform: translateY(-2px) scale(1.02);
+  color: var(--accent-ice);
+}
+
+/* Rotating Specialization Pill */
+.hero-rotating-bar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  animation: recueilFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+}
+
+.rotating-label {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.hero-rotating-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-rotating-pill.flip {
+  transform: translateY(-3px) scale(1.02);
+  border-color: rgba(186, 230, 253, 0.4);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.ice-pulse-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent-ice);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--accent-ice);
+}
+
+.rotating-text {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+/* Supporting Paragraph */
+.hero-supporting-text-recueil {
+  font-size: clamp(1.1rem, 1.8vw, 1.28rem);
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 680px;
+  margin: 0 auto 40px;
+  font-weight: 400;
+  animation: recueilFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+/* Dual CTAs (Recueil Style) */
+.hero-actions-recueil {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+  animation: recueilFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both;
+}
+
+.hero-btn-main {
+  padding: 16px 36px;
+  font-size: 1rem;
+}
+
+.hero-btn-sub {
+  padding: 16px 32px;
+  font-size: 1rem;
+}
+
+.btn-arrow-down {
+  transition: transform 0.25s ease;
+  animation: bounceDown 2s infinite ease-in-out;
+}
+
+/* Recueil Atelier 4-Column Stats Ribbon */
+.hero-atelier-ribbon {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 980px;
+  margin-bottom: 40px;
+  animation: recueilFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both;
+}
+
+.atelier-stat-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 20px 18px;
+  text-align: left;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.atelier-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(186, 230, 253, 0.3), transparent);
+}
+
+.atelier-stat-card:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(186, 230, 253, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.stat-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.stat-metric {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.stat-icon {
+  color: var(--accent-ice);
+  opacity: 0.85;
+}
+
+.stat-label {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+
+.stat-sub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Scroll Indicator */
+.hero-scroll-indicator {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  z-index: 2;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.hero-scroll-indicator:hover {
+  color: var(--accent-ice);
+}
+
+.hero-scroll-indicator .mouse-icon {
+  width: 22px;
+  height: 34px;
+  border: 1.8px solid rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+  transition: border-color var(--transition-fast);
+}
+
+.hero-scroll-indicator:hover .mouse-icon {
+  border-color: var(--accent-ice);
+}
+
+.hero-scroll-indicator .mouse-wheel {
+  width: 3px;
+  height: 7px;
+  background: var(--accent-ice);
+  border-radius: 2px;
+  animation: mouseWheelSlide 1.8s infinite ease-in-out;
+}
+
+/* ==========================================================================
+   ANIMATION KEYFRAMES
+   ========================================================================== */
+
+@keyframes recueilBadgeEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes recueilFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes recueilPulseGlow {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.12);
+    opacity: 1;
+  }
+}
+
+@keyframes icePulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+@keyframes mouseWheelSlide {
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(6px); opacity: 0.3; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 992px) {
+  .hero-atelier-ribbon {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding-top: calc(var(--nav-height) + 30px);
+    padding-bottom: 50px;
+    min-height: auto;
+  }
+  .hero-headline-recueil {
+    font-size: 2.8rem;
+  }
+  .hero-actions-recueil {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-actions-recueil .btn {
+    width: 100%;
+  }
+  .hero-atelier-ribbon {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

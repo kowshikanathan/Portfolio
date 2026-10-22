@@ -1,0 +1,200 @@
+/* ==========================================================================
+   ABOUT ME — RECUEIL EDITORIAL ATELIER THEME
+   Reference: https://recueil.framer.website/
+   ========================================================================== */
+
+.about-section {
+  padding: 120px 0;
+  position: relative;
+  background: linear-gradient(180deg, transparent 0%, rgba(25, 39, 72, 0.4) 50%, transparent 100%);
+}
+
+.about-split-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* Narrative Column */
+.about-narrative {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-intro-lead {
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  font-weight: 500;
+  line-height: 1.6;
+  color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.about-intro-lead span.highlight {
+  color: var(--accent-ice);
+  font-weight: 600;
+}
+
+.about-body-text {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+/* Philosophy Card — Recueil Frosted Glass Callout */
+.philosophy-card {
+  margin-top: 24px;
+  background: rgba(186, 230, 253, 0.07);
+  border: 1px solid rgba(186, 230, 253, 0.22);
+  border-left: 4px solid var(--accent-ice);
+  border-radius: var(--radius-md);
+  padding: 24px 28px;
+  position: relative;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--accent-ice);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.philosophy-quote {
+  font-family: var(--font-serif);
+  font-size: 1.22rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #ffffff;
+  font-style: italic;
+}
+
+/* Visual Composition Column */
+.about-visual-column {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.about-interactive-card {
+  width: 100%;
+  max-width: 440px;
+  background: rgba(255, 255, 255, 0.05);
+  background-image: radial-gradient(87% 106% at 102.8% -35.7%, rgba(89, 120, 160, 0.25) 0%, rgba(36, 61, 107, 0.4) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-xl);
+  padding: 30px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 16px;
+}
+
+.system-node-cluster {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.system-node {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.system-node:hover {
+  border-color: rgba(186, 230, 253, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(4px);
+}
+
+.node-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.node-icon-wrap {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(186, 230, 253, 0.12);
+  border: 1px solid rgba(186, 230, 253, 0.25);
+  color: var(--accent-ice);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.node-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.node-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.node-status-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-ice);
+  font-weight: 600;
+}
+
+/* Synergy Bridge */
+.synergy-bridge {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px dashed rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  text-align: center;
+}
+
+.bridge-formula {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.formula-highlight {
+  color: var(--accent-ice);
+  font-weight: 700;
+}
+
+@media (max-width: 992px) {
+  .about-split-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+}
