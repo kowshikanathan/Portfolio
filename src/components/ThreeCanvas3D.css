@@ -1,0 +1,233 @@
+/* ==========================================================================
+   THREE.JS 3D INTERACTIVE CANVAS & HOLOGRAPHIC STAGE
+   ========================================================================== */
+
+.three-scene-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  height: 480px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  user-select: none;
+}
+
+.three-canvas-element {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  filter: drop-shadow(0 20px 40px rgba(255, 122, 0, 0.22));
+  transition: filter 0.3s ease;
+}
+
+.three-canvas-element.grab {
+  cursor: grab;
+}
+
+.three-canvas-element.grabbing {
+  cursor: grabbing;
+}
+
+/* -------------------------------------------------------------
+   FLOATING 3D HOLOGRAPHIC BADGES
+   ------------------------------------------------------------- */
+.three-floating-badge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 122, 0, 0.25);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(30, 40, 70, 0.12), 0 0 16px rgba(255, 122, 0, 0.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink, #1d2433);
+  pointer-events: none;
+  z-index: 5;
+  white-space: nowrap;
+}
+
+:root[data-theme="dark"] .three-floating-badge {
+  background: rgba(27, 32, 42, 0.85);
+  border: 1px solid rgba(255, 122, 0, 0.35);
+  color: #f1f3f8;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(255, 122, 0, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .three-floating-badge {
+    background: rgba(27, 32, 42, 0.85);
+    border: 1px solid rgba(255, 122, 0, 0.35);
+    color: #f1f3f8;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(255, 122, 0, 0.2);
+  }
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.dot-orange {
+  background-color: #ff7a00;
+  color: #ff7a00;
+}
+
+.dot-cyan {
+  background-color: #38bdf8;
+  color: #38bdf8;
+}
+
+.dot-gold {
+  background-color: #ffb703;
+  color: #ffb703;
+}
+
+.badge-ux {
+  top: 10%;
+  left: -20px;
+  animation: floatBadge1 6s ease-in-out infinite;
+}
+
+.badge-code {
+  bottom: 22%;
+  left: -15px;
+  animation: floatBadge2 7s ease-in-out infinite;
+}
+
+.badge-react {
+  top: 24%;
+  right: -25px;
+  animation: floatBadge3 6.5s ease-in-out infinite;
+}
+
+@keyframes floatBadge1 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-1.5deg);
+  }
+}
+
+@keyframes floatBadge2 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(1.2deg);
+  }
+}
+
+@keyframes floatBadge3 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1.5deg);
+  }
+}
+
+/* -------------------------------------------------------------
+   INTERACTION HINT WRAPPER
+   ------------------------------------------------------------- */
+.three-bottom-hint-wrap {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.three-interaction-hint {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--mute, #667085);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 122, 0, 0.2);
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(30, 40, 70, 0.08);
+  backdrop-filter: blur(10px);
+  letter-spacing: 0.02em;
+  animation: pulseHint 2.4s ease-in-out infinite;
+}
+
+:root[data-theme="dark"] .three-interaction-hint {
+  background: rgba(27, 32, 42, 0.85);
+  border-color: rgba(255, 122, 0, 0.3);
+  color: #cbd5e1;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .three-interaction-hint {
+    background: rgba(27, 32, 42, 0.85);
+    border-color: rgba(255, 122, 0, 0.3);
+    color: #cbd5e1;
+  }
+}
+
+.drag-icon {
+  font-size: 0.88rem;
+  color: var(--or, #ff7a00);
+}
+
+@keyframes pulseHint {
+  0%, 100% {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.55;
+    transform: translateY(2px);
+  }
+}
+
+/* -------------------------------------------------------------
+   RESPONSIVE DESIGN
+   ------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .three-scene-wrapper {
+    max-width: 400px;
+    height: 400px;
+  }
+  .badge-ux {
+    left: 0px;
+    top: 5%;
+  }
+  .badge-react {
+    right: 0px;
+    top: 15%;
+  }
+  .badge-code {
+    left: 10px;
+    bottom: 22%;
+  }
+}
+
+@media (max-width: 580px) {
+  .three-scene-wrapper {
+    max-width: 320px;
+    height: 340px;
+  }
+  .three-floating-badge {
+    display: none;
+  }
+}

@@ -1,0 +1,58 @@
+/* ==========================================================================
+   3D PERSPECTIVE TILT CARD & SPECULAR LIGHTING ENGINE
+   ========================================================================== */
+
+.tilt-card-3d-root {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+  border-radius: inherit;
+}
+
+.tilt-card-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  border-radius: inherit;
+}
+
+/* Children depth pop layers */
+.tilt-card-3d-root.is-tilting .tilt-pop-sm {
+  transform: translateZ(16px);
+  transition: transform 0.1s ease;
+}
+
+.tilt-card-3d-root.is-tilting .tilt-pop-md {
+  transform: translateZ(30px);
+  transition: transform 0.1s ease;
+}
+
+.tilt-card-3d-root.is-tilting .tilt-pop-lg {
+  transform: translateZ(48px);
+  transition: transform 0.1s ease;
+}
+
+/* Specular holographic glass glare */
+.tilt-card-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 10;
+  mix-blend-mode: overlay;
+  overflow: hidden;
+}
+
+:root[data-theme="dark"] .tilt-card-glare {
+  mix-blend-mode: screen;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .tilt-card-glare {
+    mix-blend-mode: screen;
+  }
+}

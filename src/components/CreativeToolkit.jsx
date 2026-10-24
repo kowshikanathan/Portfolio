@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Wrench } from 'lucide-react';
+import TiltCard3D from './TiltCard3D';
 
 const tools = [
   {
@@ -150,7 +151,7 @@ export default function CreativeToolkit() {
         {/* Section Heading */}
         <h2>My <b>Creative Toolkit</b></h2>
         <p className="sub">
-          The tools I use to design, build, prototype, and bring ideas to life.
+          Interactive 3D inventory of the tools I use to design, build, prototype, and bring digital ideas to life.
         </p>
 
         {/* Filter Pills Bar */}
@@ -166,24 +167,31 @@ export default function CreativeToolkit() {
           ))}
         </div>
 
-        {/* 3-Column Tool Cards Grid */}
+        {/* 3-Column Tool Cards Grid with 3D Tilt */}
         <div className="toolkit-grid">
           {filteredTools.map((tool, idx) => (
-            <div key={idx} className="tool-card">
-              <div className="tool-card-top">
-                <div className="tool-icon-wrapper">
+            <TiltCard3D
+              key={idx}
+              className="tool-card tool-card-3d"
+              maxTilt={16}
+              scale={1.04}
+              perspective={900}
+              glare={true}
+            >
+              <div className="tool-card-top tilt-pop-md">
+                <div className="tool-icon-wrapper tilt-pop-lg">
                   {tool.svg}
                 </div>
-                <span className="tool-category-badge">{tool.badge}</span>
+                <span className="tool-category-badge tilt-pop-sm">{tool.badge}</span>
               </div>
 
-              <div className="tool-meta">
+              <div className="tool-meta tilt-pop-sm">
                 <h3 className="tool-name">{tool.name}</h3>
                 <div className="tool-category-label">{tool.categoryLabel}</div>
               </div>
 
               <p className="tool-desc">{tool.desc}</p>
-            </div>
+            </TiltCard3D>
           ))}
         </div>
       </div>

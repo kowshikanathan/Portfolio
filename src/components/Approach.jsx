@@ -1,5 +1,6 @@
 import React from 'react';
 import { GitBranch, Search, Layers, Palette, Terminal } from 'lucide-react';
+import TiltCard3D from './TiltCard3D';
 
 const steps = [
   {
@@ -55,21 +56,28 @@ export default function Approach() {
           {steps.map((step) => {
             const Icon = step.icon;
             return (
-              <div key={step.number} className="approach-step-card">
-                <div className="step-card-header">
+              <TiltCard3D
+                key={step.number}
+                className="approach-step-card approach-step-3d"
+                maxTilt={14}
+                scale={1.03}
+                perspective={900}
+                glare={true}
+              >
+                <div className="step-card-header tilt-pop-md">
                   <div className="step-badge-number">{step.number}</div>
-                  <div className="step-icon-wrap">
+                  <div className="step-icon-wrap tilt-pop-lg">
                     <Icon size={20} />
                   </div>
                 </div>
 
-                <h3 className="step-card-title">{step.title}</h3>
+                <h3 className="step-card-title tilt-pop-sm">{step.title}</h3>
                 <p className="step-card-desc">{step.description}</p>
 
-                <div className="step-meta-pill">
+                <div className="step-meta-pill tilt-pop-sm">
                   {step.focus}
                 </div>
-              </div>
+              </TiltCard3D>
             );
           })}
         </div>

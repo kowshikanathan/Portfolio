@@ -1,5 +1,6 @@
 import React from 'react';
 import { Briefcase } from 'lucide-react';
+import TiltCard3D from './TiltCard3D';
 
 const milestones = [
   {
@@ -68,13 +69,19 @@ export default function Experience() {
                   <div className="timeline-node-inner" />
                 </div>
 
-                <div className="timeline-card">
-                  <div className="timeline-card-header">
+                <TiltCard3D
+                  className="timeline-card timeline-card-3d"
+                  maxTilt={10}
+                  scale={1.02}
+                  perspective={950}
+                  glare={true}
+                >
+                  <div className="timeline-card-header tilt-pop-sm">
                     <div>
                       <h3 className="timeline-org">{item.org}</h3>
                       <div className="timeline-role">{item.role}</div>
                     </div>
-                    <span className="timeline-duration-badge">
+                    <span className="timeline-duration-badge tilt-pop-md">
                       {item.duration}
                     </span>
                   </div>
@@ -83,14 +90,14 @@ export default function Experience() {
                     {item.description}
                   </p>
 
-                  <div className="timeline-tags-row">
+                  <div className="timeline-tags-row tilt-pop-sm">
                     {item.tags.map((tag, tIdx) => (
                       <span key={tIdx} className="timeline-skill-pill">
                         {tag}
                       </span>
                     ))}
                   </div>
-                </div>
+                </TiltCard3D>
               </div>
             ))}
           </div>
