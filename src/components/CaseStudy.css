@@ -6,14 +6,19 @@
 }
 
 .case-sticky-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 800;
-  background: rgba(0, 0, 0, 0.92);
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border-subtle);
-  height: var(--nav-height);
+  min-height: var(--nav-height);
   display: flex;
   align-items: center;
+  transform: translateZ(0);
 }
 
 .case-header-inner {
@@ -21,6 +26,11 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+}
+
+.case-header-inner .nav-resume-btn {
+  display: inline-flex;
+  min-height: 40px;
 }
 
 .case-back-button {
@@ -55,7 +65,7 @@
 }
 
 .case-main {
-  padding-top: clamp(48px, 6vw, 84px);
+  padding-top: calc(var(--nav-height) + clamp(28px, 4vw, 52px));
 }
 
 .case-hero-block {

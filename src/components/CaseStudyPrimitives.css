@@ -5,16 +5,20 @@
 }
 
 .cs2-sticky-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 900;
+  left: 0;
+  right: 0;
+  z-index: 2000;
   width: 100%;
-  height: var(--nav-height);
+  min-height: var(--nav-height);
   display: flex;
   align-items: center;
-  background: rgba(0, 0, 0, 0.92);
+  background: rgba(0, 0, 0, 0.94);
   backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border-subtle);
+  transform: translateZ(0);
 }
 
 .cs2-header-inner {
@@ -22,12 +26,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .cs2-back-btn,
 .cs2-header-actions {
   flex-shrink: 0;
+}
+
+.cs2-header-actions .nav-resume-btn {
+  display: inline-flex;
+  min-height: 40px;
 }
 
 .cs2-section-nav {
@@ -47,7 +58,8 @@
 }
 
 .cs2-nav-pill {
-  padding: 7px 13px;
+  padding: 8px 13px;
+  min-height: 36px;
   border-radius: 9999px;
   border: 1px solid transparent;
   background: transparent;
@@ -74,22 +86,23 @@
 }
 
 .cs2-main {
-  padding-bottom: 96px;
+  padding-top: var(--nav-height);
+  padding-bottom: 64px;
 }
 
 .cs2-section {
-  padding: 92px 0;
+  padding: clamp(44px, 5vw, 68px) 0;
   border-top: 1px solid var(--border-subtle);
   position: relative;
 }
 
 .cs2-anchor {
-  scroll-margin-top: 84px;
+  scroll-margin-top: calc(var(--nav-height) + 16px);
 }
 
 .cs2-section-head {
   max-width: 820px;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 
 .cs2-section-num {
@@ -435,8 +448,25 @@
 }
 
 @media (max-width: 960px) {
+  .cs2-header-inner {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+
   .cs2-section-nav {
-    display: none;
+    order: 3;
+    flex: 1 0 100%;
+    justify-content: flex-start;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 6px 0 2px;
+  }
+
+  .cs2-main {
+    padding-top: calc(var(--nav-height) + 46px);
+  }
+
+  .cs2-anchor {
+    scroll-margin-top: calc(var(--nav-height) + 60px);
   }
 
   .cs2-footer-grid {
@@ -450,8 +480,15 @@
 }
 
 @media (max-width: 640px) {
+  .cs2-back-btn,
+  .cs2-header-actions .nav-resume-btn {
+    padding: 8px 13px;
+    font-size: 0.82rem;
+    min-height: 40px;
+  }
+
   .cs2-section {
-    padding: 64px 0;
+    padding: 40px 0;
   }
 
   .cs2-frame.is-scrollable.is-mobile .cs2-viewport,

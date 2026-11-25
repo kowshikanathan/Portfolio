@@ -1,6 +1,5 @@
 .resume-section {
   background: transparent;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,22 +8,21 @@
 .resume-grid {
   display: grid;
   grid-template-columns: minmax(0, 45fr) minmax(0, 55fr);
-  gap: clamp(28px, 4.5vw, 72px);
+  gap: clamp(24px, 4vw, 60px);
   align-items: start;
-  padding-top: clamp(44px, 5vw, 72px);
 }
 
 .resume-visual-col {
   position: sticky;
-  top: clamp(68px, 7vh, 92px);
+  top: clamp(72px, 8vh, 96px);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .resume-vertical-stage {
-  width: min(100%, calc(min(88vh, 850px) * 9 / 16));
-  max-height: 850px;
+  width: min(100%, calc(min(84vh, 800px) * 9 / 16));
+  max-height: 800px;
   aspect-ratio: 9 / 16;
   background: transparent;
 }
@@ -37,15 +35,15 @@
 .resume-content-col {
   display: flex;
   flex-direction: column;
-  padding: 16px 0;
+  padding: 8px 0;
 }
 
 .resume-summary {
-  margin-top: 22px;
+  margin-top: 18px;
 }
 
 .resume-block {
-  margin-top: 38px;
+  margin-top: 28px;
 }
 
 .resume-block-title {

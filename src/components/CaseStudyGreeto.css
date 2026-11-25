@@ -5,12 +5,13 @@
 }
 
 .greeto-main {
-  padding-bottom: 100px;
+  padding-top: var(--nav-height);
+  padding-bottom: 64px;
 }
 
 /* Section 01: Project Hero */
 .greeto-hero-section {
-  padding: 64px 0 88px;
+  padding: 40px 0 52px;
 }
 
 .greeto-hero-copy {
@@ -117,18 +118,18 @@
 
 /* Shared Section Rhythm */
 .greeto-section {
-  padding: 96px 0;
+  padding: clamp(44px, 5vw, 68px) 0;
   border-top: 1px solid var(--border-subtle);
   position: relative;
 }
 
 .greeto-anchor-section {
-  scroll-margin-top: 84px;
+  scroll-margin-top: calc(var(--nav-height) + 16px);
 }
 
 .greeto-section-head {
   max-width: 820px;
-  margin-bottom: 52px;
+  margin-bottom: 34px;
 }
 
 .greeto-section-num {
@@ -1432,8 +1433,12 @@
 }
 
 @media (max-width: 960px) {
-  .greeto-section-nav {
-    display: none;
+  .greeto-main {
+    padding-top: calc(var(--nav-height) + 46px);
+  }
+
+  .greeto-anchor-section {
+    scroll-margin-top: calc(var(--nav-height) + 60px);
   }
 
   .greeto-pillars-grid,
@@ -1475,12 +1480,20 @@
 }
 
 @media (max-width: 640px) {
+  .greeto-main {
+    padding-top: calc(var(--nav-height) + 46px);
+  }
+
+  .greeto-anchor-section {
+    scroll-margin-top: calc(var(--nav-height) + 60px);
+  }
+
   .greeto-hero-section {
-    padding: 40px 0 56px;
+    padding: 32px 0 40px;
   }
 
   .greeto-section {
-    padding: 64px 0;
+    padding: 40px 0;
   }
 
   .greeto-meta-grid,

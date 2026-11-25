@@ -121,7 +121,6 @@ p {
 }
 
 .portfolio-root > main,
-.portfolio-root > header,
 .portfolio-root > footer,
 .portfolio-root > .case-study-shell {
   position: relative;
@@ -140,7 +139,7 @@ p {
 .scene-section {
   position: relative;
   background: transparent;
-  padding: clamp(88px, 11vw, 152px) 0;
+  padding: clamp(44px, 5.5vw, 76px) 0;
 }
 
 .scene-divider {

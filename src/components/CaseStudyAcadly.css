@@ -1,5 +1,5 @@
 .acadly-hero-section {
-  padding: 60px 0 88px;
+  padding: 40px 0 52px;
 }
 
 .acadly-hero-copy {
@@ -390,7 +390,7 @@
   color: var(--text-primary);
 }
 
-.acadly-assess-btn > span:last-child {
+.acadly-assess-btn>span:last-child {
   font-size: 0.85rem;
   line-height: 1.5;
 }
@@ -528,6 +528,7 @@
 
 /* Responsive */
 @media (max-width: 1180px) {
+
   .acadly-meta-grid,
   .acadly-four-phones,
   .acadly-four-grid {
@@ -583,4 +584,3 @@
     grid-template-columns: 1fr;
   }
 }
-

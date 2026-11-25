@@ -1,18 +1,16 @@
 .contact-section {
   background: transparent;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-bottom: clamp(64px, 7vw, 96px);
+  padding-bottom: clamp(40px, 5vw, 64px);
 }
 
 .contact-grid {
   display: grid;
   grid-template-columns: minmax(0, 45fr) minmax(0, 55fr);
-  gap: 64px;
+  gap: clamp(28px, 4vw, 56px);
   align-items: center;
-  padding-top: clamp(40px, 5vw, 68px);
 }
 
 .contact-left-col {

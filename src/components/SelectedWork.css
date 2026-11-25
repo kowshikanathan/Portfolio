@@ -5,13 +5,12 @@
 .projects-intro-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.2fr);
-  gap: clamp(28px, 4.5vw, 64px);
+  gap: clamp(24px, 4vw, 56px);
   align-items: center;
-  padding-top: clamp(48px, 6vw, 84px);
 }
 
 .projects-lead {
-  margin-top: 22px;
+  margin-top: 18px;
 }
 
 .projects-video-frame {
@@ -22,10 +21,10 @@
 
 /* Featured Editorial Showcase */
 .featured-projects-list {
-  margin-top: clamp(64px, 8vw, 108px);
+  margin-top: clamp(36px, 5vw, 64px);
   display: flex;
   flex-direction: column;
-  gap: clamp(64px, 8vw, 112px);
+  gap: clamp(44px, 5.5vw, 72px);
 }
 
 .project-featured-row {

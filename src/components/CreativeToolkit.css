@@ -5,13 +5,12 @@
 .toolkit-hero-row {
   display: grid;
   grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.32fr);
-  gap: clamp(28px, 4.5vw, 64px);
+  gap: clamp(24px, 4vw, 56px);
   align-items: center;
-  padding-top: clamp(48px, 6vw, 84px);
 }
 
 .toolkit-lead {
-  margin-top: 22px;
+  margin-top: 18px;
 }
 
 .toolkit-video-frame {
@@ -21,15 +20,15 @@
 }
 
 .toolkit-categories {
-  margin-top: clamp(56px, 7vw, 88px);
+  margin-top: clamp(32px, 4vw, 52px);
   border-top: 1px solid var(--border-subtle);
 }
 
 .toolkit-band {
   display: grid;
   grid-template-columns: 240px 1fr;
-  gap: 28px;
-  padding: 36px 0;
+  gap: 24px;
+  padding: 28px 0;
   border-bottom: 1px solid var(--border-subtle);
   align-items: start;
 }

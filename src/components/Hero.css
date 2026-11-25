@@ -194,17 +194,36 @@
 }
 
 @media (max-width: 768px) {
+  .hero-section {
+    min-height: calc(100svh - 12px);
+  }
+
   .hero-video-stage .scroll-video-el,
   .hero-video-stage .scroll-video-poster-layer,
   .hero-video-stage .scroll-video-fallback {
-    object-position: center 14%;
-    padding-bottom: 150px;
+    object-position: center 12%;
+    padding-bottom: 195px;
   }
 
   .hero-content-layer {
     flex-direction: column;
     align-items: flex-start;
-    padding-bottom: 28px;
+    padding-bottom: max(52px, env(safe-area-inset-bottom, 24px) + 32px);
+  }
+
+  .hero-tagline {
+    margin-bottom: 20px;
+  }
+
+  .hero-cta-row {
+    width: 100%;
+    gap: 12px;
+  }
+
+  .hero-cta-row .btn-primary,
+  .hero-cta-row .btn-secondary {
+    min-height: 46px;
+    padding: 12px 20px;
   }
 
   .hero-scroll-cue {
