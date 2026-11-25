@@ -1,215 +1,310 @@
-import React, { useEffect, useState, useRef } from 'react';
-import * as THREE from 'three';
+import React, { useEffect, useRef } from 'react';
+import './BackgroundCanvas.css';
 
 /**
- * BackgroundCanvas
- * Delivers an immersive, state-of-the-art 3D animated environment:
- * - Real-time Three.js 3D WebGL ambient particle constellation with 3D scroll travel
- * - Fluid floating ambient glowing mesh orbs (orange, apricot, subtle cyan twilight)
- * - Subtle blueprint dot-matrix & crosshair design grid with radial vignette
- * - Mild floating design tokens with parallax drift
+ * Global interactive background canvas:
+ * - Pure black #000000 base with subtle blueprint grid & orange accent dots
+ * - Mouse-following radial orange spotlight with smooth lerp & viewport-exit fade
+ * - Reactive grid dots near cursor + low-density gently repelling ambient particles
+ * - Zero React re-renders during mouse movement (rAF + Canvas 2D)
+ * - Responsive particle density (desktop -> tablet -> static grid on mobile/touch)
+ * - Pauses automatically when tab is hidden; respects prefers-reduced-motion
  */
 export default function BackgroundCanvas() {
   const canvasRef = useRef(null);
-  const [scrollY, setScrollY] = useState(0);
+  const spotlightRef = useRef(null);
 
-  // 1. Scroll listener for CSS parallax layers
-  useEffect(() => {
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setScrollY(window.scrollY);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // 2. Three.js Ambient 3D Particle Universe
   useEffect(() => {
     const canvas = canvasRef.current;
+    const spotlightEl = spotlightRef.current;
     if (!canvas) return;
 
-    // Check if user prefers reduced motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
+    const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const isCoarsePointer = window.matchMedia?.('(pointer: coarse)').matches;
+
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
 
     let width = window.innerWidth;
     let height = window.innerHeight;
+    let dpr = Math.min(window.devicePixelRatio || 1, 1.5);
 
-    // Scene & Camera
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
-    camera.position.z = 25;
+    const gridSpacing = 38;
+    const lineSpacing = 76;
 
-    // WebGL Renderer
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      alpha: true,
-      antialias: false, // keep light on GPU
-      powerPreference: 'low-power',
-    });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    renderer.setClearColor(0x000000, 0);
-
-    // Particle Cloud
-    const particleCount = 400;
-    const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-
-    const orangeColor = new THREE.Color(0xff7a00);
-    const cyanColor = new THREE.Color(0x38bdf8);
-    const whiteColor = new THREE.Color(0xffffff);
-
-    for (let i = 0; i < particleCount; i++) {
-      const i3 = i * 3;
-      positions[i3] = (Math.random() - 0.5) * 60;
-      positions[i3 + 1] = (Math.random() - 0.5) * 80;
-      positions[i3 + 2] = (Math.random() - 0.5) * 40;
-
-      const rand = Math.random();
-      const chosenColor = rand > 0.6 ? orangeColor : rand > 0.3 ? cyanColor : whiteColor;
-      colors[i3] = chosenColor.r;
-      colors[i3 + 1] = chosenColor.g;
-      colors[i3 + 2] = chosenColor.b;
-    }
-
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-    const material = new THREE.PointsMaterial({
-      size: 0.15,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.55,
-      blending: THREE.AdditiveBlending,
-    });
-
-    const particles = new THREE.Points(geometry, material);
-    scene.add(particles);
-
-    // Mouse & Scroll coordinates for 3D camera parallax
-    let mouseX = 0;
-    let mouseY = 0;
-    let targetMouseX = 0;
-    let targetMouseY = 0;
-    let targetScrollY = 0;
-    let currentScrollY = 0;
-
-    const handleMouseMove = (e) => {
-      targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
-      targetMouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+    // Responsive particle density
+    const getParticleCount = (w) => {
+      if (prefersReduced || w < 768) return 0;
+      if (w < 1024) return 18;
+      return 38;
     };
 
-    const handleScrollPos = () => {
-      targetScrollY = window.scrollY;
+    const particles = [];
+    const buildParticles = () => {
+      particles.length = 0;
+      const count = getParticleCount(width);
+      for (let i = 0; i < count; i++) {
+        const homeX = Math.random() * width;
+        const homeY = Math.random() * height;
+        const isOrange = Math.random() > 0.35;
+        particles.push({
+          x: homeX,
+          y: homeY,
+          homeX,
+          homeY,
+          vx: (Math.random() - 0.5) * 0.22,
+          vy: (Math.random() - 0.5) * 0.22,
+          radius: isOrange ? 1.15 + Math.random() * 1.15 : 0.9 + Math.random() * 0.8,
+          alpha: isOrange ? 0.22 + Math.random() * 0.24 : 0.12 + Math.random() * 0.14,
+          isOrange,
+          phase: Math.random() * Math.PI * 2,
+        });
+      }
     };
 
-    const handleResize = () => {
+    const resize = () => {
       width = window.innerWidth;
       height = window.innerHeight;
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-      renderer.setSize(width, height);
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      buildParticles();
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('scroll', handleScrollPos, { passive: true });
-    window.addEventListener('resize', handleResize);
+    resize();
 
-    // Animation Loop
+    // Cursor state (interpolated without React state updates)
+    const mouse = {
+      targetX: width * 0.5,
+      targetY: height * 0.35,
+      x: width * 0.5,
+      y: height * 0.35,
+      targetOpacity: 0,
+      opacity: 0,
+      active: false,
+    };
+
+    const onMouseMove = (e) => {
+      if (isCoarsePointer || prefersReduced) return;
+      mouse.targetX = e.clientX;
+      mouse.targetY = e.clientY;
+      mouse.targetOpacity = 1;
+      mouse.active = true;
+    };
+
+    const onMouseLeave = () => {
+      mouse.targetOpacity = 0;
+      mouse.active = false;
+    };
+
     let animId = null;
-    let clock = new THREE.Clock();
+    let isVisible = !document.hidden;
+    let time = 0;
 
-    const animate = () => {
-      const delta = clock.getDelta();
-      const elapsedTime = clock.getElapsedTime();
+    const drawStaticGrid = () => {
+      ctx.clearRect(0, 0, width, height);
 
-      // Lerp mouse
-      mouseX += (targetMouseX - mouseX) * 0.05;
-      mouseY += (targetMouseY - mouseY) * 0.05;
+      // Subtle major grid lines (76px)
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.028)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let x = 0; x <= width; x += lineSpacing) {
+        ctx.moveTo(x + 0.5, 0);
+        ctx.lineTo(x + 0.5, height);
+      }
+      for (let y = 0; y <= height; y += lineSpacing) {
+        ctx.moveTo(0, y + 0.5);
+        ctx.lineTo(width, y + 0.5);
+      }
+      ctx.stroke();
 
-      // Lerp scroll
-      currentScrollY += (targetScrollY - currentScrollY) * 0.08;
-
-      // Parallax camera adjustments
-      camera.position.x = mouseX * 2.5;
-      camera.position.y = mouseY * 2.0 - (currentScrollY * 0.012);
-
-      // Rotate particle cloud gently
-      particles.rotation.y = elapsedTime * 0.02;
-      particles.rotation.x = Math.sin(elapsedTime * 0.015) * 0.08;
-
-      renderer.render(scene, camera);
-      animId = requestAnimationFrame(animate);
+      // Subtle orange accent dots (38px matrix)
+      for (let x = 0; x <= width; x += gridSpacing) {
+        for (let y = 0; y <= height; y += gridSpacing) {
+          const isMajor = x % lineSpacing === 0 && y % lineSpacing === 0;
+          ctx.fillStyle = isMajor
+            ? 'rgba(255, 121, 0, 0.24)'
+            : 'rgba(255, 180, 91, 0.10)';
+          ctx.beginPath();
+          ctx.arc(x, y, isMajor ? 1.2 : 0.85, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
     };
 
-    animate();
+    if (prefersReduced || isCoarsePointer || width < 768) {
+      drawStaticGrid();
+    }
+
+    const renderFrame = () => {
+      if (!isVisible) {
+        animId = null;
+        return;
+      }
+
+      if (prefersReduced || isCoarsePointer || width < 768) {
+        drawStaticGrid();
+        animId = null;
+        return;
+      }
+
+      time += 0.016;
+
+      // Smooth cursor interpolation
+      mouse.x += (mouse.targetX - mouse.x) * 0.09;
+      mouse.y += (mouse.targetY - mouse.y) * 0.09;
+      mouse.opacity += (mouse.targetOpacity - mouse.opacity) * 0.07;
+
+      if (spotlightEl) {
+        spotlightEl.style.transform = `translate3d(${mouse.x}px, ${mouse.y}px, 0)`;
+        spotlightEl.style.opacity = `${mouse.opacity.toFixed(3)}`;
+      }
+
+      ctx.clearRect(0, 0, width, height);
+
+      // 1. Subtle 76px architectural grid lines
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.026)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let x = 0; x <= width; x += lineSpacing) {
+        ctx.moveTo(x + 0.5, 0);
+        ctx.lineTo(x + 0.5, height);
+      }
+      for (let y = 0; y <= height; y += lineSpacing) {
+        ctx.moveTo(0, y + 0.5);
+        ctx.lineTo(width, y + 0.5);
+      }
+      ctx.stroke();
+
+      // 2. Reactive orange grid dots (brighten smoothly near cursor)
+      const gridGlowRadius = 210;
+      const gridGlowRadiusSq = gridGlowRadius * gridGlowRadius;
+
+      for (let x = 0; x <= width; x += gridSpacing) {
+        for (let y = 0; y <= height; y += gridSpacing) {
+          const isMajor = x % lineSpacing === 0 && y % lineSpacing === 0;
+          let alpha = isMajor ? 0.22 : 0.085;
+          let radius = isMajor ? 1.15 : 0.85;
+
+          if (mouse.opacity > 0.02) {
+            const dx = x - mouse.x;
+            const dy = y - mouse.y;
+            const distSq = dx * dx + dy * dy;
+            if (distSq < gridGlowRadiusSq) {
+              const proximity = 1 - Math.sqrt(distSq) / gridGlowRadius;
+              const boost = proximity * proximity * mouse.opacity;
+              alpha += boost * (isMajor ? 0.52 : 0.34);
+              radius += boost * 0.75;
+            }
+          }
+
+          ctx.fillStyle = isMajor
+            ? `rgba(255, 121, 0, ${alpha.toFixed(3)})`
+            : `rgba(255, 180, 91, ${alpha.toFixed(3)})`;
+          ctx.beginPath();
+          ctx.arc(x, y, radius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // 3. Low-density floating particles with gentle cursor repulsion & spring return
+      const repelRadius = 135;
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+
+        p.homeX += p.vx;
+        p.homeY += p.vy;
+
+        if (p.homeX < -20) p.homeX = width + 20;
+        if (p.homeX > width + 20) p.homeX = -20;
+        if (p.homeY < -20) p.homeY = height + 20;
+        if (p.homeY > height + 20) p.homeY = -20;
+
+        let targetX = p.homeX + Math.sin(time + p.phase) * 6;
+        let targetY = p.homeY + Math.cos(time * 0.8 + p.phase) * 6;
+
+        if (mouse.opacity > 0.05) {
+          const dx = targetX - mouse.x;
+          const dy = targetY - mouse.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist > 0 && dist < repelRadius) {
+            const push = ((repelRadius - dist) / repelRadius) * 24 * mouse.opacity;
+            targetX += (dx / dist) * push;
+            targetY += (dy / dist) * push;
+          }
+        }
+
+        p.x += (targetX - p.x) * 0.08;
+        p.y += (targetY - p.y) * 0.08;
+
+        ctx.fillStyle = p.isOrange
+          ? `rgba(255, 121, 0, ${p.alpha})`
+          : `rgba(255, 255, 255, ${p.alpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      animId = window.requestAnimationFrame(renderFrame);
+    };
+
+    const startLoop = () => {
+      if (!animId && isVisible) {
+        animId = window.requestAnimationFrame(renderFrame);
+      }
+    };
+
+    const onVisibilityChange = () => {
+      isVisible = !document.hidden;
+      if (isVisible) {
+        startLoop();
+      } else if (animId) {
+        window.cancelAnimationFrame(animId);
+        animId = null;
+      }
+    };
+
+    const onResize = () => {
+      resize();
+      if (prefersReduced || isCoarsePointer || width < 768) {
+        drawStaticGrid();
+      } else {
+        startLoop();
+      }
+    };
+
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    document.addEventListener('mouseleave', onMouseLeave);
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    window.addEventListener('resize', onResize, { passive: true });
+
+    startLoop();
 
     return () => {
-      if (animId) cancelAnimationFrame(animId);
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('scroll', handleScrollPos);
-      window.removeEventListener('resize', handleResize);
-      renderer.dispose();
-      geometry.dispose();
-      material.dispose();
+      if (animId) window.cancelAnimationFrame(animId);
+      window.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseleave', onMouseLeave);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+      window.removeEventListener('resize', onResize);
     };
   }, []);
 
-  // Parallax factors for CSS layers
-  const p1 = scrollY * 0.12;
-  const p2 = scrollY * -0.08;
-  const p3 = scrollY * 0.15;
-  const p4 = scrollY * -0.05;
-
   return (
     <div className="bg-canvas-container" aria-hidden="true">
-      {/* 1. Real-time Three.js 3D Ambient WebGL Canvas */}
-      <canvas ref={canvasRef} className="bg-three-webgl-canvas" />
+      {/* Subtle Ambient Orange Orbs for Cross-Section Depth */}
+      <div className="bg-ambient-orb bg-orb-top" />
+      <div className="bg-ambient-orb bg-orb-bottom" />
 
-      {/* 2. Subtle Design & Tech Grid Pattern */}
-      <div className="bg-grid-layer" />
+      {/* Interactive Grid + Orange Dots + Particles */}
+      <canvas ref={canvasRef} className="bg-interactive-canvas" />
 
-      {/* 3. Fluid Ambient Glowing Gradient Orbs */}
-      <div
-        className="bg-orb bg-orb-hero"
-        style={{ transform: `translate3d(0, ${p1}px, 0)` }}
-      />
-      <div
-        className="bg-orb bg-orb-apricot"
-        style={{ transform: `translate3d(0, ${p2}px, 0)` }}
-      />
-      <div
-        className="bg-orb bg-orb-cyan"
-        style={{ transform: `translate3d(0, ${p3}px, 0)` }}
-      />
-      <div
-        className="bg-orb bg-orb-bottom"
-        style={{ transform: `translate3d(0, ${p4}px, 0)` }}
-      />
+      {/* Smooth Feathered Mouse-Following Orange Spotlight */}
+      <div ref={spotlightRef} className="bg-mouse-spotlight" />
 
-      {/* 4. Mild Floating Design & Code Symbols */}
-      <div className="bg-floating-elements" style={{ transform: `translate3d(0, ${p2 * 0.7}px, 0)` }}>
-        <span className="bg-particle p-cross p-1">+</span>
-        <span className="bg-particle p-circle p-2" />
-        <span className="bg-particle p-bracket p-3">&#123;&nbsp;&#125;</span>
-        <span className="bg-particle p-cross p-4">+</span>
-        <span className="bg-particle p-pill p-5" />
-        <span className="bg-particle p-bracket p-6">&lt;/&gt;</span>
-        <span className="bg-particle p-circle p-7" />
-        <span className="bg-particle p-cross p-8">+</span>
-      </div>
-
-      {/* 5. Soft Vignette Overlay */}
+      {/* Soft Edge Vignette */}
       <div className="bg-vignette-overlay" />
     </div>
   );

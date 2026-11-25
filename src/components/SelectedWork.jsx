@@ -1,137 +1,97 @@
 import React from 'react';
+import { ArrowUpRight } from 'lucide-react';
+import { CASE_STUDIES } from '../data/caseStudies';
+import ScrollVideo from './ScrollVideo';
 import TiltCard3D from './TiltCard3D';
-import { Layers, ArrowUpRight } from 'lucide-react';
-
-const projects = [
-  {
-    id: 'link-management',
-    title: 'Link Management Website',
-    desc: 'A clean, easy-to-use website for creating, organizing and sharing links. I designed the full experience.',
-    thumb: '/images/project-ziplin.webp',
-    tags: ['UX/UI Design', 'Web', 'Information Architecture'],
-    caseStudyId: 'link-management',
-    status: 'View case study',
-    highlight: 'Featured Case',
-  },
-  {
-    id: 'academy',
-    title: 'Academy Website',
-    desc: 'A website for an academy that helps students find courses and get in touch with ease.',
-    thumb: '/images/project-academy.webp',
-    tags: ['UX/UI Design', 'Web', 'Course Portal'],
-    caseStudyId: 'academy',
-    status: 'View case study',
-    highlight: 'EdTech Platform',
-  },
-  {
-    id: 'fee-management',
-    title: 'Fee Management Website',
-    desc: 'An ongoing project: a fee management platform inspired by Jodo, making fee payments simple for schools and parents. I’m designing it and building the frontend.',
-    thumb: '/images/project-fee-management.webp',
-    tags: ['UX/UI Design', 'Frontend', 'React', 'Ongoing'],
-    caseStudyId: 'fee-management',
-    status: 'View case study',
-    isOngoing: true,
-    highlight: 'Fintech & EdTech',
-  },
-  {
-    id: 'beauty-app',
-    title: 'Beauty Shopping App',
-    desc: 'An app that simplifies skincare routines and product discovery, with personalized picks from a skin-type quiz and AI skin analysis through the camera.',
-    thumb: '/images/project-beauty-app.webp',
-    tags: ['UX Research', 'UI Design', 'iOS & Android'],
-    caseStudyId: 'beauty-app',
-    status: 'View case study',
-    highlight: 'Mobile Experience',
-  },
-];
+import { ProjectThumbnailMockup } from './ProjectMockups';
+import './SelectedWork.css';
 
 export default function SelectedWork({ onSelectCaseStudy }) {
+  const featuredProjects = CASE_STUDIES.filter((p) => p.featured);
+
   return (
-    <section id="projects" className="projects-3d-section">
-      <div className="wrap">
-        <div className="section-eyebrow-center">
-          <span className="eyebrow-pill">
-            <Layers size={13} />
-            FEATURED PORTFOLIO
-          </span>
+    <section id="projects" className="scene-section projects-section">
+      <div className="scene-divider" aria-hidden="true" />
+
+      <div className="container">
+        {/* Cinematic Project Intro Header */}
+        <div className="projects-intro-grid">
+          <div className="projects-intro-copy">
+            <div className="scene-kicker" data-reveal>
+              <span className="scene-kicker-dot" aria-hidden="true" />
+              <span>04 — Selected Projects</span>
+            </div>
+
+            <h2 className="scene-heading" data-reveal data-reveal-delay="0.06">
+              Ideas Turned Into <span className="accent-word">Experiences.</span>
+            </h2>
+
+            <p className="scene-lead projects-lead" data-reveal data-reveal-delay="0.12">
+              Real product interfaces, mobile flows, and SaaS dashboards designed from user
+              research through high-fidelity design systems.
+            </p>
+          </div>
+
+          <div className="projects-intro-video" data-parallax="-14">
+            <div className="projects-video-frame">
+              <ScrollVideo
+                src="/videos/project.mp4"
+                poster="/videos/posters/project.jpg"
+                fallbackPoster="/videos/posters/project-end.jpg"
+                mode="scroll"
+                aspectRatio="16 / 9"
+                fit="contain"
+                objectPosition="50% 50%"
+                seamless={true}
+                ariaLabel="3D character of Kowshika presenting product work on a laptop at a studio desk"
+              />
+            </div>
+          </div>
         </div>
 
-        <h2>My <b>Projects</b></h2>
-        <p className="sub">Interactive 3D showcase of my recent design and frontend work</p>
-
-        <div className="grid g3 projects-3d-grid">
-          {projects.map((p, idx) => (
-            <TiltCard3D
-              key={idx}
-              className="card project-3d-card"
-              maxTilt={14}
-              scale={1.03}
-              perspective={1100}
-              glare={true}
+        {/* Featured Projects (Greeto, Acadly, Learnex) */}
+        <div className="featured-projects-list">
+          {featuredProjects.map((project, index) => (
+            <article
+              key={project.id}
+              className={`project-featured-row ${index % 2 === 1 ? 'is-reversed' : ''}`}
+              data-reveal
             >
-              <div className="project-card-inner">
-                {/* 3D Floating Thumbnail */}
-                <div className="thumb tilt-pop-md project-thumb-3d">
-                  <img src={p.thumb} alt={p.title} loading="lazy" />
-                  <div className="project-badge-highlight tilt-pop-lg">
-                    {p.highlight}
-                  </div>
+              <div className="project-featured-visual">
+                <TiltCard3D maxTilt={6} scale={1.015} glare={true}>
+                  <ProjectThumbnailMockup project={project} />
+                </TiltCard3D>
+              </div>
+
+              <div className="project-featured-content">
+                <div className="project-meta-top">
+                  <span className="project-index">0{index + 1}</span>
+                  <span className="project-category">{project.category}</span>
                 </div>
 
-                <div className="project-info-3d tilt-pop-sm">
-                  <h3 className="project-title-3d">{p.title}</h3>
-                  <p className="project-desc-3d">{p.desc}</p>
+                <h3 className="project-featured-title">{project.title}</h3>
+                <p className="project-featured-desc">{project.description}</p>
 
-                  <div className="tags tilt-pop-sm">
-                    {p.tags.map((t, tIdx) => (
-                      <span key={tIdx} className="project-tag-pill">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+                <div className="project-role-line">
+                  <span className="project-role-label">Role</span>
+                  <span className="project-role-value">{project.role}</span>
+                </div>
 
-                  <div className="project-action-row tilt-pop-md">
-                    {p.caseStudyId ? (
-                      <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
-                        <button
-                          type="button"
-                          className="go project-link-3d"
-                          onClick={() => onSelectCaseStudy && onSelectCaseStudy(p.caseStudyId)}
-                          style={{ border: 'none', cursor: 'pointer' }}
-                        >
-                          <span>{p.status}</span>
-                          <ArrowUpRight size={15} className="link-arrow-icon" />
-                        </button>
-
-                        {p.isOngoing && (
-                          <span className="ongoing-pill" title="Project is currently active & ongoing">
-                            <span className="pulse-dot"></span>
-                            Ongoing
-                          </span>
-                        )}
-                      </div>
-                    ) : p.link ? (
-                      <a
-                        className="go project-link-3d"
-                        href={p.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <span>{p.status}</span>
-                        <ArrowUpRight size={15} className="link-arrow-icon" />
-                      </a>
-                    ) : (
-                      <span className="soon project-status-pill">{p.status}</span>
-                    )}
-                  </div>
+                <div className="project-action-wrap">
+                  <button
+                    type="button"
+                    className="btn-primary project-case-btn"
+                    onClick={() => onSelectCaseStudy(project.id)}
+                  >
+                    <span>View Case Study</span>
+                    <ArrowUpRight size={16} />
+                  </button>
                 </div>
               </div>
-            </TiltCard3D>
+            </article>
           ))}
         </div>
       </div>
     </section>
   );
 }
-

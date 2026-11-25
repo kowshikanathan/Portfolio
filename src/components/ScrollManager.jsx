@@ -1,117 +1,82 @@
-import React, { useEffect, useState } from 'react';
-import { ArrowUp } from 'lucide-react';
+import { useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-/**
- * ScrollManager
- * Handles scroll-driven interactive experiences:
- * 1. Glowing top progress bar showing user's reading depth
- * 2. IntersectionObserver for smooth scroll-reveal on sections & cards
- * 3. Floating back-to-top button with smooth scroll
- */
-export default function ScrollManager() {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [showBackToTop, setShowBackToTop] = useState(false);
+gsap.registerPlugin(ScrollTrigger);
 
+export default function ScrollManager({ routeKey }) {
   useEffect(() => {
-    const handleScroll = () => {
-      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+    const bar = document.getElementById('scrollProgressBar');
+    let rafId = null;
 
-      setScrollProgress(scrolled);
-      setShowBackToTop(winScroll > 380);
+    const updateProgress = () => {
+      if (!bar) return;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = docHeight > 0 ? Math.min(1, Math.max(0, window.scrollY / docHeight)) : 0;
+      bar.style.transform = `scaleX(${ratio})`;
+      rafId = null;
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    const onScroll = () => {
+      if (!rafId) {
+        rafId = window.requestAnimationFrame(updateProgress);
+      }
+    };
 
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    updateProgress();
 
-  // IntersectionObserver to orchestrate smooth scroll-reveal animations across all sections
-  useEffect(() => {
-    // Check if user prefers reduced motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      // Reveal everything immediately if reduced motion is requested
-      document.querySelectorAll('.scroll-reveal, section, .card, .approach-step-card, .timeline-item, .toolkit-card, .box, .stats')
-        .forEach(el => el.classList.add('is-revealed'));
-      return;
-    }
+    const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
-    const observerCallback = (entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-revealed');
-          // Once revealed, unobserve to keep animation lightweight
-          observer.unobserve(entry.target);
-        }
+    const ctx = gsap.context(() => {
+      if (prefersReduced) {
+        gsap.set('[data-reveal]', { opacity: 1, y: 0, clearProps: 'transform' });
+        return;
+      }
+
+      const items = gsap.utils.toArray('[data-reveal]');
+      items.forEach((el) => {
+        const delay = Number(el.getAttribute('data-reveal-delay') || 0);
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 28 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.85,
+            delay,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 86%',
+              once: true,
+            },
+          }
+        );
       });
-    };
 
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px 0px -60px 0px', // trigger slightly before it enters full viewport
-      threshold: 0.12
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    // Target elements to animate on scroll
-    const selectors = [
-      '.scroll-reveal',
-      'section > .wrap > h2',
-      'section > .wrap > .sub',
-      'section > .wrap > .section-eyebrow-center',
-      '.about .box',
-      '.about .stats',
-      '.approach-step-card',
-      '.toolkit-card',
-      '.timeline-item',
-      '.card',
-      '.contact .pic',
-      '.contact form'
-    ];
-
-    const elements = document.querySelectorAll(selectors.join(', '));
-    elements.forEach(el => {
-      el.classList.add('reveal-init');
-      observer.observe(el);
+      const parallaxItems = gsap.utils.toArray('[data-parallax]');
+      parallaxItems.forEach((el) => {
+        const yOffset = Number(el.getAttribute('data-parallax') || -24);
+        gsap.to(el, {
+          y: yOffset,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
+      });
     });
 
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafId) window.cancelAnimationFrame(rafId);
+      ctx.revert();
+    };
+  }, [routeKey]);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
-  return (
-    <>
-      {/* 1. Top Scroll Indicator Line with Theme Neon Glow */}
-      <div
-        className="scroll-progress-bar"
-        style={{ width: `${scrollProgress}%` }}
-        role="progressbar"
-        aria-valuenow={Math.round(scrollProgress)}
-        aria-valuemin="0"
-        aria-valuemax="100"
-        aria-label="Page reading progress"
-      />
-
-      {/* 2. Floating Return-To-Top Button */}
-      <button
-        type="button"
-        className={`back-to-top-btn ${showBackToTop ? 'visible' : ''}`}
-        onClick={scrollToTop}
-        aria-label="Scroll back to top"
-        title="Back to top"
-      >
-        <ArrowUp size={18} strokeWidth={2.4} />
-      </button>
-    </>
-  );
+  return <div id="scrollProgressBar" className="scroll-progress-bar" aria-hidden="true" />;
 }

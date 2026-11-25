@@ -1,0 +1,1512 @@
+.greeto-case-shell {
+  min-height: 100vh;
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.greeto-main {
+  padding-bottom: 100px;
+}
+
+/* Section 01: Project Hero */
+.greeto-hero-section {
+  padding: 64px 0 88px;
+}
+
+.greeto-hero-copy {
+  max-width: 920px;
+}
+
+.greeto-eyebrow-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.greeto-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+}
+
+.greeto-eyebrow {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--accent-glow);
+  text-transform: uppercase;
+}
+
+.greeto-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(3.6rem, 7.5vw, 6.4rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.96;
+  color: var(--text-primary);
+  margin-bottom: 22px;
+}
+
+.greeto-hero-subtitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 2.3vw, 2rem);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: #e4e4e7;
+  margin-bottom: 16px;
+  max-width: 760px;
+}
+
+.greeto-hero-description {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  max-width: 720px;
+}
+
+.greeto-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 42px 0 48px;
+}
+
+.greeto-meta-item {
+  background: rgba(16, 16, 16, 0.78);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.greeto-meta-label {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.greeto-meta-value {
+  font-size: 0.96rem;
+  line-height: 1.45;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.greeto-hero-mockup {
+  position: relative;
+}
+
+.greeto-hero-mockup::before {
+  content: '';
+  position: absolute;
+  inset: -40px 6% auto;
+  height: 220px;
+  background: radial-gradient(ellipse at center, rgba(255, 121, 0, 0.16), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Shared Section Rhythm */
+.greeto-section {
+  padding: 96px 0;
+  border-top: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+.greeto-anchor-section {
+  scroll-margin-top: 84px;
+}
+
+.greeto-section-head {
+  max-width: 820px;
+  margin-bottom: 52px;
+}
+
+.greeto-section-num {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--accent-glow);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.greeto-section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.8vw, 3.1rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+}
+
+.greeto-section-lead {
+  font-size: 1.04rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+/* Media Frames & Slot Placeholders */
+.greeto-media-frame {
+  position: relative;
+  margin: 0;
+  z-index: 1;
+}
+
+.greeto-media-viewport {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #09090b;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.65);
+}
+
+.greeto-media-frame.is-hero .greeto-media-viewport {
+  border-radius: 20px;
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.greeto-media-viewport img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.greeto-expand-btn {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 13px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(10, 10, 12, 0.84);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: transform 0.2s var(--ease-out), border-color 0.2s var(--ease-out),
+    background 0.2s var(--ease-out);
+}
+
+.greeto-expand-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  background: rgba(20, 20, 22, 0.95);
+}
+
+.greeto-media-caption {
+  margin-top: 12px;
+  font-size: 0.84rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.greeto-slot-placeholder {
+  border-radius: 16px;
+  border: 1px dashed rgba(255, 121, 0, 0.42);
+  background: rgba(18, 14, 10, 0.68);
+  padding: 36px 28px;
+}
+
+.greeto-slot-inner {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 12px;
+}
+
+.greeto-slot-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 121, 0, 0.35);
+  background: rgba(255, 121, 0, 0.1);
+  color: var(--accent-glow);
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.greeto-slot-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--text-primary);
+}
+
+.greeto-slot-instruction {
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 540px;
+}
+
+.greeto-slot-path {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: #e4e4e7;
+  font-size: 0.82rem;
+}
+
+/* Section 02: Pillars */
+.greeto-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.greeto-pillar-card,
+.greeto-objective-card,
+.greeto-learning-card,
+.greeto-wf-pillar {
+  background: rgba(16, 16, 16, 0.78);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.greeto-card-index {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent-glow);
+}
+
+.greeto-pillar-card h3,
+.greeto-objective-card h3,
+.greeto-learning-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--text-primary);
+}
+
+.greeto-pillar-card p,
+.greeto-objective-card p,
+.greeto-learning-card p,
+.greeto-wf-pillar p {
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* Section 03: Existing Product Analysis */
+.greeto-analysis-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 36px;
+  align-items: start;
+}
+
+.greeto-observations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.greeto-observation-card {
+  background: rgba(16, 16, 16, 0.78);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px 22px;
+}
+
+.greeto-observation-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.greeto-obs-num {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-glow);
+}
+
+.greeto-obs-tag {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  border: 1px solid var(--border-subtle);
+  padding: 3px 9px;
+  border-radius: 9999px;
+}
+
+.greeto-observation-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.08rem;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.greeto-observation-card p {
+  font-size: 0.93rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+/* Section 04: Design Challenge */
+.greeto-challenge-section {
+  background: radial-gradient(circle at 50% 45%, rgba(255, 121, 0, 0.08), transparent 65%);
+}
+
+.greeto-challenge-box {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.greeto-hmw-statement {
+  font-family: var(--font-heading);
+  font-size: clamp(1.9rem, 3.8vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  margin: 18px 0 32px;
+}
+
+.greeto-challenge-context {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  text-align: left;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 28px;
+}
+
+.greeto-challenge-context p {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+/* Section 05: Objectives */
+.greeto-objectives-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* Section 06: Information Architecture Tree */
+.greeto-ia-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.greeto-ia-root {
+  background: rgba(255, 121, 0, 0.08);
+  border: 1px solid rgba(255, 121, 0, 0.4);
+  border-radius: 16px;
+  padding: 20px 30px;
+  text-align: center;
+  max-width: 560px;
+  width: 100%;
+}
+
+.greeto-ia-root-badge {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-glow);
+  margin-bottom: 6px;
+}
+
+.greeto-ia-root h3 {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.greeto-ia-root p {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+}
+
+.greeto-ia-stem {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 121, 0, 0.45);
+}
+
+.greeto-ia-crossbar {
+  width: 68%;
+  height: 1px;
+  background: rgba(255, 121, 0, 0.35);
+}
+
+.greeto-ia-branches {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.greeto-ia-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.greeto-ia-branch-drop {
+  width: 1px;
+  height: 22px;
+  margin: 0 auto;
+  background: rgba(255, 121, 0, 0.35);
+}
+
+.greeto-ia-branch-head {
+  text-align: center;
+  padding: 10px 14px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.04);
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+}
+
+.greeto-ia-nodes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.greeto-ia-node {
+  background: rgba(16, 16, 16, 0.78);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+
+.greeto-ia-node h4 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.greeto-ia-node p {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+/* Section 07: Before & After */
+.greeto-ba-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.greeto-ba-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.greeto-ba-status {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.greeto-ba-pill {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-glow);
+  padding: 5px 11px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 121, 0, 0.32);
+  background: rgba(255, 121, 0, 0.08);
+}
+
+.greeto-ba-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.greeto-ba-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.greeto-ba-col-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  padding: 0 4px;
+}
+
+.greeto-ba-col-head.is-before {
+  color: var(--text-secondary);
+}
+
+.greeto-ba-col-head.is-after {
+  color: var(--accent-glow);
+}
+
+.greeto-ba-annotations {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.greeto-ba-note {
+  background: rgba(16, 16, 16, 0.78);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.greeto-ba-note h4 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.greeto-ba-pair span {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.greeto-ba-pair .is-before-label {
+  color: var(--text-dim);
+}
+
+.greeto-ba-pair .is-after-label {
+  color: var(--accent-glow);
+}
+
+.greeto-ba-pair p {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+/* Section 08: Design System */
+.greeto-ds-shell {
+  background: rgba(14, 14, 16, 0.82);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.greeto-ds-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.greeto-ds-tab {
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease-out), color 0.2s var(--ease-out),
+    background 0.2s var(--ease-out);
+}
+
+.greeto-ds-tab:hover {
+  color: var(--text-primary);
+}
+
+.greeto-ds-tab.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #050505;
+  font-weight: 600;
+}
+
+.greeto-ds-panel {
+  padding: 32px;
+}
+
+.greeto-ds-panel-header {
+  max-width: 720px;
+  margin-bottom: 28px;
+}
+
+.greeto-ds-panel-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.greeto-ds-panel-header p {
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.greeto-swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.greeto-swatch-card {
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  background: rgba(10, 10, 12, 0.72);
+}
+
+.greeto-swatch-color {
+  height: 82px;
+  display: flex;
+  align-items: flex-end;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.greeto-swatch-color span {
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #ffffff;
+}
+
+.greeto-swatch-info {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.greeto-swatch-info h4 {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.greeto-swatch-info p {
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.greeto-swatch-note {
+  font-size: 0.74rem;
+  color: var(--accent-glow);
+}
+
+.greeto-placeholder-notice {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 121, 0, 0.3);
+  background: rgba(255, 121, 0, 0.08);
+  color: var(--accent-glow);
+  font-size: 0.86rem;
+  margin-bottom: 16px;
+}
+
+.greeto-type-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.greeto-type-row {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  padding: 16px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.greeto-type-token {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  color: var(--accent-glow);
+}
+
+.greeto-type-sample {
+  font-family: var(--font-heading);
+  font-size: 1.04rem;
+  color: var(--text-primary);
+}
+
+.greeto-type-spec {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.greeto-controls-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 24px;
+  padding-left: 18px;
+  margin-bottom: 24px;
+  color: var(--text-secondary);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.greeto-ds-two-screens {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.greeto-badges-stage {
+  padding: 28px;
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.greeto-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.greeto-system-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.greeto-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.greeto-system-badge.is-mint {
+  background: #d7f5ea;
+  color: #0b4f3a;
+}
+
+.greeto-system-badge.is-sky {
+  background: #e0f2fe;
+  color: #075985;
+}
+
+.greeto-system-badge.is-amber {
+  background: #fef1e2;
+  color: #9a3412;
+}
+
+.greeto-system-badge.is-neutral {
+  background: #e4e4e7;
+  color: #27272a;
+}
+
+.greeto-system-badge.is-danger {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.greeto-badges-caption {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Section 09: Alternating Modules */
+.greeto-modules-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+}
+
+.greeto-module-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.25fr);
+  gap: 44px;
+  align-items: center;
+}
+
+.greeto-module-row.is-reversed .greeto-module-media {
+  order: -1;
+}
+
+.greeto-module-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.greeto-module-num {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-glow);
+  margin-bottom: 6px;
+}
+
+.greeto-module-top h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 2.5vw, 2.15rem);
+  color: var(--text-primary);
+}
+
+.greeto-mini-label {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+.greeto-module-block p {
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.greeto-module-list {
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: #d4d4d8;
+}
+
+.greeto-state-toggle {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 4px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.03);
+  gap: 4px;
+}
+
+.greeto-toggle-btn {
+  padding: 7px 14px;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.greeto-toggle-btn.is-active {
+  background: rgba(255, 121, 0, 0.16);
+  color: var(--accent-glow);
+}
+
+/* Section 10: Workflow Builder */
+.greeto-wf-pillars {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 36px;
+}
+
+.greeto-wf-pillar h4 {
+  font-family: var(--font-heading);
+  font-size: 1.04rem;
+  color: var(--text-primary);
+}
+
+.greeto-wf-interactive {
+  display: grid;
+  grid-template-columns: 330px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.greeto-wf-steps-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.greeto-wf-step-btn {
+  text-align: left;
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(16, 16, 16, 0.72);
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease-out), background 0.2s var(--ease-out);
+}
+
+.greeto-wf-step-btn:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.greeto-wf-step-btn.is-active {
+  border-color: rgba(255, 121, 0, 0.5);
+  background: rgba(255, 121, 0, 0.08);
+}
+
+.greeto-wf-step-num {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-glow);
+}
+
+.greeto-wf-step-btn strong {
+  font-family: var(--font-heading);
+  font-size: 0.98rem;
+  color: var(--text-primary);
+}
+
+.greeto-wf-step-sub {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+}
+
+.greeto-wf-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.greeto-wf-stage-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.greeto-wf-stage-meta h3 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.greeto-wf-stage-meta p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 680px;
+}
+
+.greeto-wf-nav-arrows {
+  display: inline-flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.greeto-circle-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.greeto-circle-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent-glow);
+}
+
+/* Section 11: Interface States */
+.greeto-states-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.greeto-filter-pill {
+  padding: 9px 16px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.greeto-filter-pill.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #050505;
+  font-weight: 600;
+}
+
+.greeto-states-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.greeto-state-card {
+  background: rgba(16, 16, 16, 0.78);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.greeto-state-meta {
+  padding: 0 6px 6px;
+}
+
+.greeto-state-feature {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-glow);
+  margin-bottom: 4px;
+}
+
+.greeto-state-meta h4 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+}
+
+.greeto-state-meta p {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+/* Section 12: Showcase Overlap & Horizontal Gallery */
+.greeto-overlap-stage {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: center;
+  margin-bottom: 64px;
+}
+
+.greeto-overlap-back {
+  grid-column: 1 / 8;
+  grid-row: 1;
+  opacity: 0.88;
+}
+
+.greeto-overlap-front {
+  grid-column: 5 / 13;
+  grid-row: 1;
+  transform: translateY(36px);
+  z-index: 2;
+}
+
+.greeto-gallery-rail-wrap {
+  margin-top: 72px;
+}
+
+.greeto-gallery-rail-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-glow);
+  margin-bottom: 18px;
+}
+
+.greeto-gallery-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(340px, 440px);
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  scroll-snap-type: x proximity;
+  scrollbar-color: rgba(255, 121, 0, 0.45) rgba(255, 255, 255, 0.05);
+}
+
+.greeto-gallery-card {
+  scroll-snap-align: start;
+  background: rgba(16, 16, 16, 0.8);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.greeto-gallery-card-body {
+  padding: 0 6px 4px;
+}
+
+.greeto-gallery-card-body span {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-glow);
+}
+
+.greeto-gallery-card-body h4 {
+  font-family: var(--font-heading);
+  font-size: 1.02rem;
+  color: var(--text-primary);
+  margin: 4px 0;
+}
+
+.greeto-gallery-card-body p {
+  font-size: 0.87rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+/* Section 13: Outcome & Next Project */
+.greeto-learnings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.greeto-next-footer {
+  margin-top: 72px;
+  padding: 40px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 121, 0, 0.28);
+  background: linear-gradient(135deg, rgba(255, 121, 0, 0.08), rgba(16, 16, 16, 0.92));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.greeto-next-kicker {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--accent-glow);
+  margin-bottom: 8px;
+}
+
+.greeto-next-copy h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.greeto-next-copy p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  max-width: 560px;
+}
+
+.greeto-next-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* Lightbox Modal */
+.greeto-lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.greeto-lightbox-frame {
+  width: min(1320px, 100%);
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.greeto-lightbox-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.greeto-lightbox-caption {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.greeto-lightbox-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.greeto-lightbox-counter {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.greeto-lightbox-close {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.greeto-lightbox-close:hover {
+  border-color: var(--accent);
+  color: var(--accent-glow);
+}
+
+.greeto-lightbox-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: calc(92vh - 64px);
+}
+
+.greeto-lightbox-stage img {
+  max-width: 100%;
+  max-height: calc(92vh - 64px);
+  width: auto;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  object-fit: contain;
+}
+
+.greeto-lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(12, 12, 14, 0.85);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.greeto-lightbox-arrow.is-prev {
+  left: 14px;
+}
+
+.greeto-lightbox-arrow.is-next {
+  right: 14px;
+}
+
+.greeto-lightbox-arrow:hover {
+  border-color: var(--accent);
+  color: var(--accent-glow);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1120px) {
+  .greeto-meta-grid,
+  .greeto-ba-annotations,
+  .greeto-wf-pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .greeto-wf-interactive {
+    grid-template-columns: 1fr;
+  }
+
+  .greeto-wf-steps-rail {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .greeto-states-grid,
+  .greeto-learnings-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 960px) {
+  .greeto-section-nav {
+    display: none;
+  }
+
+  .greeto-pillars-grid,
+  .greeto-objectives-grid,
+  .greeto-ia-branches,
+  .greeto-analysis-layout,
+  .greeto-module-row,
+  .greeto-ba-grid,
+  .greeto-ds-two-screens,
+  .greeto-challenge-context {
+    grid-template-columns: 1fr;
+  }
+
+  .greeto-ia-crossbar {
+    display: none;
+  }
+
+  .greeto-module-row.is-reversed .greeto-module-media {
+    order: 0;
+  }
+
+  .greeto-type-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .greeto-overlap-stage {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .greeto-overlap-back,
+  .greeto-overlap-front {
+    grid-column: 1;
+    grid-row: auto;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .greeto-hero-section {
+    padding: 40px 0 56px;
+  }
+
+  .greeto-section {
+    padding: 64px 0;
+  }
+
+  .greeto-meta-grid,
+  .greeto-ba-annotations,
+  .greeto-wf-pillars,
+  .greeto-wf-steps-rail,
+  .greeto-states-grid,
+  .greeto-learnings-grid,
+  .greeto-controls-list {
+    grid-template-columns: 1fr;
+  }
+
+  .greeto-ds-panel {
+    padding: 20px;
+  }
+
+  .greeto-next-footer {
+    padding: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .greeto-expand-btn,
+  .greeto-ds-tab,
+  .greeto-wf-step-btn {
+    transition: none;
+  }
+}
+

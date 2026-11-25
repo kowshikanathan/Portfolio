@@ -1,0 +1,105 @@
+.scroll-video-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--stage-aspect, 16 / 9);
+  background: transparent;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  mask-image: radial-gradient(ellipse 92% 90% at 50% 50%, #000 72%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 92% 90% at 50% 50%, #000 72%, transparent 100%);
+}
+
+.scroll-video-stage.is-seamless {
+  mask-image: radial-gradient(ellipse 84% 88% at 50% 50%, #000 66%, transparent 99%);
+  -webkit-mask-image: radial-gradient(ellipse 84% 88% at 50% 50%, #000 66%, transparent 99%);
+}
+
+.scroll-video-ambient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 52% 48% at 50% 44%,
+    rgba(255, 121, 0, 0.1) 0%,
+    rgba(255, 180, 91, 0.03) 45%,
+    transparent 72%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.scroll-video-poster-layer,
+.scroll-video-el,
+.scroll-video-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: var(--video-fit, contain);
+  object-position: var(--video-pos, center bottom);
+  background: #000000;
+  pointer-events: none;
+}
+
+.scroll-video-poster-layer {
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+
+.scroll-video-stage.is-ready .scroll-video-poster-layer {
+  opacity: 0;
+}
+
+.scroll-video-el {
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-video-stage.is-ready .scroll-video-el,
+.scroll-video-fallback {
+  opacity: 1;
+  z-index: 3;
+}
+
+.scroll-video-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, transparent 10%, transparent 88%, rgba(0, 0, 0, 0.55) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.55) 0%, transparent 12%, transparent 88%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+.scroll-video-stage.is-seamless .scroll-video-vignette {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, transparent 8%, transparent 88%, rgba(0, 0, 0, 0.45) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.45) 0%, transparent 14%, transparent 86%, rgba(0, 0, 0, 0.45) 100%);
+}
+
+.scroll-video-play-fallback {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: 6;
+  background: rgba(16, 16, 16, 0.9);
+  border: 1px solid rgba(255, 121, 0, 0.45);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.scroll-video-play-fallback:hover {
+  border-color: var(--accent);
+  background: rgba(255, 121, 0, 0.16);
+}
+

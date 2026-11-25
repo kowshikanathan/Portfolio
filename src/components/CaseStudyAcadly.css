@@ -1,0 +1,586 @@
+.acadly-hero-section {
+  padding: 60px 0 88px;
+}
+
+.acadly-hero-copy {
+  max-width: 900px;
+}
+
+.acadly-eyebrow-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.acadly-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+}
+
+.acadly-eyebrow {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--accent-glow);
+  text-transform: uppercase;
+}
+
+.acadly-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(3.5rem, 7.2vw, 6.2rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.96;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.acadly-hero-headline {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 2.3vw, 2rem);
+  font-weight: 500;
+  color: #e4e4e7;
+  margin-bottom: 14px;
+}
+
+.acadly-hero-description {
+  font-size: 1.04rem;
+  line-height: 1.78;
+  color: var(--text-secondary);
+  max-width: 760px;
+}
+
+.acadly-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 40px 0 56px;
+}
+
+.acadly-meta-card {
+  background: rgba(16, 16, 16, 0.8);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.acadly-meta-label {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.acadly-meta-value {
+  font-size: 0.96rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Overlapping 3-Phone Hero Stage */
+.acadly-hero-phones {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 20px 0 12px;
+}
+
+.acadly-hero-phones::before {
+  content: '';
+  position: absolute;
+  inset: 10% 18% auto;
+  height: 360px;
+  background: radial-gradient(circle at center, rgba(255, 121, 0, 0.16), transparent 68%);
+  pointer-events: none;
+}
+
+.acadly-hero-phone {
+  position: relative;
+  width: 280px;
+  flex-shrink: 0;
+}
+
+.acadly-hero-phone.is-center-main {
+  width: 325px;
+  z-index: 3;
+}
+
+.acadly-hero-phone.is-back-left {
+  transform: translateY(28px);
+  z-index: 2;
+  opacity: 0.92;
+}
+
+.acadly-hero-phone.is-back-right {
+  transform: translateY(28px);
+  z-index: 2;
+  opacity: 0.92;
+}
+
+/* Shared Cards */
+.acadly-three-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.acadly-two-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  text-align: left;
+}
+
+.acadly-four-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.acadly-glass-card {
+  background: rgba(16, 16, 16, 0.78);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.acadly-glass-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--text-primary);
+}
+
+.acadly-glass-card p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* Challenge */
+.acadly-challenge-band {
+  background: radial-gradient(circle at 50% 40%, rgba(255, 121, 0, 0.08), transparent 68%);
+}
+
+.acadly-challenge-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.acadly-hmw {
+  font-family: var(--font-heading);
+  font-size: clamp(1.85rem, 3.6vw, 3rem);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  margin: 16px 0 36px;
+}
+
+/* Student Journey Track */
+.acadly-journey-track {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.acadly-journey-node {
+  position: relative;
+  background: rgba(16, 16, 16, 0.78);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.acadly-step-pill {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 121, 0, 0.32);
+  background: rgba(255, 121, 0, 0.09);
+  color: var(--accent-glow);
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.acadly-journey-node h3 {
+  font-family: var(--font-heading);
+  font-size: 1.02rem;
+  color: var(--text-primary);
+}
+
+.acadly-journey-node p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.acadly-journey-arrow {
+  position: absolute;
+  right: -11px;
+  top: 20px;
+  color: var(--accent);
+  font-size: 0.9rem;
+  z-index: 2;
+}
+
+/* Onboarding */
+.acadly-bullet-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  padding-left: 18px;
+  margin-bottom: 36px;
+  color: var(--text-secondary);
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+
+.acadly-four-phones {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  margin-bottom: 36px;
+}
+
+.acadly-phone-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.acadly-col-kicker {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--accent-glow);
+}
+
+.acadly-sheet-wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* Dashboards & Gamification */
+.acadly-dashboard-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.acadly-dashboard-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.acadly-dashboard-meta h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--text-primary);
+}
+
+.acadly-dashboard-meta p {
+  font-size: 0.93rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+/* Horizontally Scrolling Phone Galleries */
+.acadly-horizontal-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(270px, 310px);
+  gap: 24px;
+  overflow-x: auto;
+  padding-bottom: 18px;
+  scroll-snap-type: x proximity;
+  scrollbar-color: rgba(255, 121, 0, 0.45) rgba(255, 255, 255, 0.05);
+}
+
+.acadly-rail-card {
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.acadly-rail-head span {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--accent-glow);
+  margin-bottom: 4px;
+}
+
+.acadly-rail-head h3 {
+  font-family: var(--font-heading);
+  font-size: 1.08rem;
+  color: var(--text-primary);
+}
+
+/* Assessment Highlight */
+.acadly-highlight-band {
+  background: radial-gradient(circle at 80% 35%, rgba(255, 121, 0, 0.08), transparent 62%);
+}
+
+.acadly-assessment-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 36px;
+  align-items: start;
+  margin-bottom: 48px;
+}
+
+.acadly-assessment-steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.acadly-assess-btn {
+  text-align: left;
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(16, 16, 16, 0.78);
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease-out), background 0.2s var(--ease-out);
+}
+
+.acadly-assess-btn:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.acadly-assess-btn.is-active {
+  border-color: rgba(255, 121, 0, 0.55);
+  background: rgba(255, 121, 0, 0.1);
+}
+
+.acadly-assess-btn strong {
+  font-family: var(--font-heading);
+  font-size: 1.02rem;
+  color: var(--text-primary);
+}
+
+.acadly-assess-btn > span:last-child {
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.acadly-assessment-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.acadly-assess-preview-head h3 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin: 8px 0 4px;
+}
+
+.acadly-assess-preview-head p {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.acadly-connected-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(220px, 250px);
+  gap: 18px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 32px;
+}
+
+.acadly-mini-step {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.acadly-mini-step-num {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  color: var(--text-primary);
+}
+
+.acadly-mini-step-num span:first-child {
+  color: var(--accent-glow);
+  font-weight: 700;
+}
+
+/* Filter Bar */
+.acadly-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.acadly-filter-pill {
+  padding: 9px 16px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.acadly-filter-pill.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #050505;
+  font-weight: 600;
+}
+
+.acadly-gallery-tile {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Swatches */
+.acadly-swatches-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.acadly-swatch-card {
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(16, 16, 16, 0.8);
+  overflow: hidden;
+}
+
+.acadly-swatch-fill {
+  height: 78px;
+  display: flex;
+  align-items: flex-end;
+  padding: 10px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.acadly-swatch-fill span {
+  font-family: var(--font-heading);
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.68);
+  color: #ffffff;
+}
+
+.acadly-swatch-meta {
+  padding: 14px;
+}
+
+.acadly-swatch-meta h4 {
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.acadly-swatch-meta p {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 1180px) {
+  .acadly-meta-grid,
+  .acadly-four-phones,
+  .acadly-four-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .acadly-journey-track {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .acadly-journey-arrow {
+    display: none;
+  }
+
+  .acadly-swatches-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .acadly-assessment-stage {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 920px) {
+  .acadly-hero-phones {
+    flex-direction: column;
+  }
+
+  .acadly-hero-phone,
+  .acadly-hero-phone.is-center-main {
+    width: min(330px, 100%);
+    transform: none;
+  }
+
+  .acadly-three-grid,
+  .acadly-two-grid,
+  .acadly-bullet-row,
+  .acadly-assessment-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .acadly-hero-section {
+    padding: 40px 0 56px;
+  }
+
+  .acadly-meta-grid,
+  .acadly-four-phones,
+  .acadly-four-grid,
+  .acadly-journey-track,
+  .acadly-swatches-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

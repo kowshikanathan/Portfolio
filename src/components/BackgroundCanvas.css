@@ -1,0 +1,122 @@
+.bg-canvas-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  user-select: none;
+}
+
+.bg-interactive-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 92% 88% at 50% 42%, #000 35%, transparent 96%);
+  -webkit-mask-image: radial-gradient(ellipse 92% 88% at 50% 42%, #000 35%, transparent 96%);
+}
+
+/* Restrained Ambient Orange Lighting */
+.bg-ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.bg-orb-top {
+  top: -160px;
+  right: -6%;
+  width: min(680px, 82vw);
+  height: min(680px, 82vw);
+  background: radial-gradient(
+    circle,
+    rgba(255, 121, 0, 0.085) 0%,
+    rgba(255, 180, 91, 0.025) 52%,
+    transparent 74%
+  );
+  animation: bgOrbDriftA 28s ease-in-out infinite alternate;
+}
+
+.bg-orb-bottom {
+  bottom: -180px;
+  left: -8%;
+  width: min(660px, 80vw);
+  height: min(660px, 80vw);
+  background: radial-gradient(
+    circle,
+    rgba(255, 121, 0, 0.07) 0%,
+    rgba(255, 180, 91, 0.02) 52%,
+    transparent 74%
+  );
+  animation: bgOrbDriftB 32s ease-in-out infinite alternate;
+}
+
+@keyframes bgOrbDriftA {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(-40px, 35px, 0) scale(1.06);
+  }
+}
+
+@keyframes bgOrbDriftB {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(35px, -30px, 0) scale(1.05);
+  }
+}
+
+/* Feathered Mouse-Following Orange Spotlight */
+.bg-mouse-spotlight {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 620px;
+  height: 620px;
+  margin-left: -310px;
+  margin-top: -310px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+  background: radial-gradient(
+    circle,
+    rgba(255, 121, 0, 0.11) 0%,
+    rgba(255, 180, 91, 0.045) 34%,
+    rgba(255, 121, 0, 0.012) 58%,
+    transparent 76%
+  );
+}
+
+.bg-vignette-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 56%, rgba(0, 0, 0, 0.72) 115%);
+  pointer-events: none;
+}
+
+@media (hover: none), (pointer: coarse), (max-width: 767px) {
+  .bg-mouse-spotlight {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-ambient-orb {
+    animation: none;
+  }
+
+  .bg-mouse-spotlight {
+    display: none;
+  }
+}
+

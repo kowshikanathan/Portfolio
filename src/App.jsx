@@ -1,60 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getCaseStudyById } from './data/caseStudies';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import AboutMe from './components/AboutMe';
 import CreativeToolkit from './components/CreativeToolkit';
-import Approach from './components/Approach';
-import Experience from './components/Experience';
 import SelectedWork from './components/SelectedWork';
+import ResumeSection from './components/ResumeSection';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import BackgroundCanvas from './components/BackgroundCanvas';
 import ScrollManager from './components/ScrollManager';
-import CaseStudyLinkManagement from './components/CaseStudyLinkManagement';
-import CaseStudyFeeManagement from './components/CaseStudyFeeManagement';
-import CaseStudyAcademy from './components/CaseStudyAcademy';
-import CaseStudyBeautyApp from './components/CaseStudyBeautyApp';
+import BackgroundCanvas from './components/BackgroundCanvas';
+import CustomCursor from './components/CustomCursor';
+import InteractiveEffects from './components/InteractiveEffects';
+import CaseStudyPage from './components/CaseStudyPage';
+import CaseStudyGreeto from './components/CaseStudyGreeto';
+import CaseStudyAcadly from './components/CaseStudyAcadly';
+import CaseStudyLearnex from './components/CaseStudyLearnex';
+
+function resolveCaseStudyFromHash() {
+  try {
+    const hash = window.location.hash || '';
+    if (!hash.startsWith('#case-study/')) return null;
+    const rawId = hash.replace('#case-study/', '').trim();
+    return getCaseStudyById(rawId)?.id || null;
+  } catch {
+    return null;
+  }
+}
 
 export default function App() {
-  const [activeCaseStudy, setActiveCaseStudy] = useState(() => {
-    try {
-      const hash = window.location.hash;
-      if (hash === '#case-study/link-management') return 'link-management';
-      if (hash === '#case-study/fee-management') return 'fee-management';
-      if (hash === '#case-study/academy') return 'academy';
-      if (hash === '#case-study/beauty-app') return 'beauty-app';
-    } catch {}
-    return null;
-  });
+  const [activeCaseStudyId, setActiveCaseStudyId] = useState(resolveCaseStudyFromHash);
 
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      if (hash === '#case-study/link-management') {
-        setActiveCaseStudy('link-management');
-      } else if (hash === '#case-study/fee-management') {
-        setActiveCaseStudy('fee-management');
-      } else if (hash === '#case-study/academy') {
-        setActiveCaseStudy('academy');
-      } else if (hash === '#case-study/beauty-app') {
-        setActiveCaseStudy('beauty-app');
-      } else if (hash === '#projects' || !hash.startsWith('#case-study')) {
-        setActiveCaseStudy(null);
-      }
+    const onHashChange = () => {
+      setActiveCaseStudyId(resolveCaseStudyFromHash());
     };
-
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
 
   const handleOpenCaseStudy = (id) => {
-    setActiveCaseStudy(id);
-    window.location.hash = `case-study/${id}`;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const study = getCaseStudyById(id);
+    if (!study) return;
+    setActiveCaseStudyId(study.id);
+    window.location.hash = `case-study/${study.id}`;
   };
 
-  const handleBackToHome = () => {
-    setActiveCaseStudy(null);
+  const handleBackToProjects = () => {
+    setActiveCaseStudyId(null);
     window.location.hash = 'projects';
     setTimeout(() => {
       const el = document.getElementById('projects');
@@ -64,32 +57,56 @@ export default function App() {
     }, 60);
   };
 
+  const activeStudy = activeCaseStudyId ? getCaseStudyById(activeCaseStudyId) : null;
+
   return (
     <div className="portfolio-root">
-      {/* Dynamic Background Animations (Grid, Floating Orbs, Micro Particles) */}
       <BackgroundCanvas />
+      <CustomCursor />
+      <InteractiveEffects routeKey={activeStudy ? activeStudy.id : 'home'} />
 
-      {/* Scroll Progress Bar & Scroll Reveal Controller */}
-      <ScrollManager />
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
 
-      {activeCaseStudy === 'link-management' ? (
-        <CaseStudyLinkManagement onBack={handleBackToHome} />
-      ) : activeCaseStudy === 'fee-management' ? (
-        <CaseStudyFeeManagement onBack={handleBackToHome} />
-      ) : activeCaseStudy === 'academy' ? (
-        <CaseStudyAcademy onBack={handleBackToHome} />
-      ) : activeCaseStudy === 'beauty-app' ? (
-        <CaseStudyBeautyApp onBack={handleBackToHome} />
+      <ScrollManager routeKey={activeStudy ? activeStudy.id : 'home'} />
+
+      {activeStudy ? (
+        activeStudy.id === 'greeto' ? (
+          <CaseStudyGreeto
+            key={activeStudy.id}
+            onBack={handleBackToProjects}
+            onSelectCaseStudy={handleOpenCaseStudy}
+          />
+        ) : activeStudy.id === 'acadly' ? (
+          <CaseStudyAcadly
+            key={activeStudy.id}
+            onBack={handleBackToProjects}
+            onSelectCaseStudy={handleOpenCaseStudy}
+          />
+        ) : activeStudy.id === 'learnex' ? (
+          <CaseStudyLearnex
+            key={activeStudy.id}
+            onBack={handleBackToProjects}
+            onSelectCaseStudy={handleOpenCaseStudy}
+          />
+        ) : (
+          <CaseStudyPage
+            key={activeStudy.id}
+            study={activeStudy}
+            onBack={handleBackToProjects}
+            onSelectCaseStudy={handleOpenCaseStudy}
+          />
+        )
       ) : (
         <>
           <Navbar />
-          <main id="top">
+          <main id="main-content">
             <Hero />
             <AboutMe />
             <CreativeToolkit />
-            <Approach />
-            <Experience />
             <SelectedWork onSelectCaseStudy={handleOpenCaseStudy} />
+            <ResumeSection />
             <Contact />
           </main>
           <Footer />
@@ -98,5 +115,3 @@ export default function App() {
     </div>
   );
 }
-
-

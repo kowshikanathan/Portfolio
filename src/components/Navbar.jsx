@@ -1,91 +1,120 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
+import './Navbar.css';
+
+const NAV_LINKS = [
+  { id: 'about', label: 'About' },
+  { id: 'skills', label: 'Toolkit' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'resume', label: 'Resume' },
+  { id: 'contact', label: 'Contact' },
+];
 
 export default function Navbar() {
-  const [theme, setTheme] = useState(() => {
-    try {
-      const saved = localStorage.getItem('theme');
-      if (saved) return saved;
-      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    } catch {
-      return 'light';
-    }
-  });
-
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('top');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    try {
-      localStorage.setItem('theme', theme);
-    } catch {}
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
-  };
-
-  useEffect(() => {
-    const ids = ['top', 'about', 'skills', 'process', 'journey', 'projects', 'contact'];
-    const handleScroll = () => {
-      const scrollPos = window.scrollY + 140;
-      let current = ids[0];
-      for (const id of ids) {
+    const sectionIds = ['top', 'about', 'skills', 'projects', 'resume', 'contact'];
+    const onScroll = () => {
+      setScrolled(window.scrollY > 36);
+      const triggerY = window.scrollY + 180;
+      let current = 'top';
+      for (const id of sectionIds) {
         const el = document.getElementById(id);
-        if (el && el.offsetTop <= scrollPos) {
+        if (el && el.offsetTop <= triggerY) {
           current = id;
         }
       }
       setActiveSection(current);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <nav>
-      <div className="pill">
-        <a className="logo" href="#top" onClick={closeMenu}>
-          Kowshika<i>.</i>
+    <header className={`site-nav ${scrolled ? 'is-scrolled' : ''}`}>
+      <div className="container nav-inner">
+        <a href="#top" className="nav-brand" onClick={closeMenu}>
+          <span className="nav-brand-mark" aria-hidden="true" />
+          <span>KOWSHIKA S</span>
         </a>
 
-        <div className={`links ${menuOpen ? 'open' : ''}`} id="links">
-          <a href="#top" className={activeSection === 'top' ? 'on' : ''} onClick={closeMenu}>Home</a>
-          <a href="#about" className={activeSection === 'about' ? 'on' : ''} onClick={closeMenu}>About</a>
-          <a href="#skills" className={activeSection === 'skills' ? 'on' : ''} onClick={closeMenu}>Toolkit</a>
-          <a href="#process" className={activeSection === 'process' ? 'on' : ''} onClick={closeMenu}>Process</a>
-          <a href="#journey" className={activeSection === 'journey' ? 'on' : ''} onClick={closeMenu}>Journey</a>
-          <a href="#projects" className={activeSection === 'projects' ? 'on' : ''} onClick={closeMenu}>Projects</a>
-          <a href="#contact" className={activeSection === 'contact' ? 'on' : ''} onClick={closeMenu}>Contact</a>
+        <nav className="nav-links" aria-label="Primary navigation">
+          {NAV_LINKS.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`nav-link ${activeSection === item.id ? 'is-active' : ''}`}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="nav-actions">
+          <a
+            href="/Kowshika_S_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-resume-btn"
+          >
+            <span>Resume</span>
+            <ArrowUpRight size={15} />
+          </a>
+
+          <button
+            type="button"
+            className="nav-mobile-toggle"
+            aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav-drawer"
+            onClick={() => setMenuOpen((prev) => !prev)}
+          >
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
-
-        <button
-          className="ic"
-          id="theme"
-          onClick={toggleTheme}
-          aria-label="Toggle dark mode"
-          title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-        >
-          {theme === 'dark' ? '☀' : '☾'}
-        </button>
-
-        <a className="btn b1 hire" href="#contact" onClick={closeMenu}>
-          Hire Me
-        </a>
-
-        <button
-          className="ic menu"
-          id="menu"
-          aria-label="Open menu"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? '✕' : '☰'}
-        </button>
       </div>
-    </nav>
+
+      {menuOpen && (
+        <div id="mobile-nav-drawer" className="nav-mobile-drawer" role="dialog" aria-label="Mobile navigation">
+          <div className="nav-mobile-list">
+            {NAV_LINKS.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className={`nav-mobile-link ${activeSection === item.id ? 'is-active' : ''}`}
+                onClick={closeMenu}
+              >
+                {item.label}
+              </a>
+            ))}
+            <a
+              href="/Kowshika_S_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary nav-mobile-cta"
+              onClick={closeMenu}
+            >
+              <span>View Resume</span>
+              <ArrowUpRight size={16} />
+            </a>
+          </div>
+        </div>
+      )}
+    </header>
   );
 }
