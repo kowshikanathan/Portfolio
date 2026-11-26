@@ -140,6 +140,7 @@ p {
   position: relative;
   background: transparent;
   padding: clamp(44px, 5.5vw, 76px) 0;
+  scroll-margin-top: calc(var(--nav-height) + env(safe-area-inset-top, 0px) + 12px);
 }
 
 .scene-divider {
@@ -305,6 +306,32 @@ p {
   transform: scaleX(0);
   z-index: 1200;
   pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .scene-section {
+    padding: 64px 0;
+  }
+
+  .scene-heading {
+    font-size: clamp(2rem, 8.5vw, 2.75rem);
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
 }
 
 /* Reduced Motion */

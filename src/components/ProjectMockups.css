@@ -85,9 +85,11 @@
   transition: transform 0.4s var(--ease-cinematic);
 }
 
-.project-featured-row:hover .mockup-layer-front,
-.project-card:hover .mockup-layer-front {
-  transform: translateY(-4px);
+@media (hover: hover) and (pointer: fine) {
+  .project-featured-row:hover .mockup-layer-front,
+  .project-card:hover .mockup-layer-front {
+    transform: translateY(-4px);
+  }
 }
 
 /* Dual Mobile Stage (Acadly) */

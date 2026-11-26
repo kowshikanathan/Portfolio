@@ -11,7 +11,8 @@
   right: 0;
   z-index: 2000;
   width: 100%;
-  min-height: var(--nav-height);
+  min-height: calc(var(--nav-height) + env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
   display: flex;
   align-items: center;
   background: rgba(0, 0, 0, 0.94);
@@ -484,16 +485,32 @@
   .cs2-header-actions .nav-resume-btn {
     padding: 8px 13px;
     font-size: 0.82rem;
-    min-height: 40px;
+    min-height: 44px;
   }
 
   .cs2-section {
     padding: 40px 0;
   }
 
+  .cs2-footer-card {
+    padding: 20px;
+  }
+
   .cs2-frame.is-scrollable.is-mobile .cs2-viewport,
   .cs2-frame.is-scrollable.is-browser .cs2-viewport {
     max-height: 440px;
+  }
+}
+
+@media (max-width: 380px) {
+  .cs2-header-inner {
+    gap: 8px;
+  }
+
+  .cs2-back-btn,
+  .cs2-header-actions .nav-resume-btn {
+    padding: 8px 10px;
+    font-size: 0.78rem;
   }
 }
 

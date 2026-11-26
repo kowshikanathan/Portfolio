@@ -55,6 +55,8 @@
   gap: 8px;
   font-size: 1rem;
   color: #c4c4cc;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   transition: color 0.25s ease;
 }
 
@@ -180,31 +182,91 @@
   }
 }
 
-/* Mobile: stacked, portrait video above form, no sticky */
-@media (max-width: 767px) {
+/* Mobile: section heading -> description -> seated video -> details -> form */
+@media (max-width: 768px) {
   .contact-section {
     min-height: auto;
+    padding-bottom: 48px;
   }
 
   .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
-  .contact-left-col {
-    position: static;
+  .contact-left-col,
+  .contact-right-col {
+    display: contents;
+  }
+
+  .contact-right-col > .scene-kicker {
+    order: 1;
+    margin-bottom: 10px;
+  }
+
+  .contact-right-col > .scene-heading {
+    order: 2;
+    margin-bottom: 14px;
+  }
+
+  .contact-lead {
+    order: 3;
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-size: 1rem;
   }
 
   .contact-vertical-stage {
-    width: min(100%, 380px);
-    max-height: 70svh;
+    order: 4;
+    width: min(100%, 340px, calc(60svh * 4 / 5));
+    max-height: none;
+    margin: 0 auto 20px;
+  }
+
+  .contact-vertical-video .scroll-video-el,
+  .contact-vertical-video .scroll-video-poster-layer,
+  .contact-vertical-video .scroll-video-fallback {
+    object-fit: contain;
+    object-position: 50% 50%;
   }
 
   .contact-info-block {
+    order: 5;
+    width: 100%;
     max-width: 100%;
+    margin-top: 0;
+    margin-bottom: 24px;
+  }
+
+  .contact-direct-lines {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contact-info-item,
+  .contact-social-link {
+    min-height: 36px;
+  }
+
+  .contact-form {
+    order: 6;
+    width: 100%;
+    margin-top: 0;
   }
 
   .contact-form-row {
     grid-template-columns: 1fr;
+  }
+
+  .contact-field input,
+  .contact-field textarea {
+    min-height: 48px;
+    font-size: 16px;
+  }
+
+  .contact-submit-row .btn-primary {
+    width: 100%;
+    min-height: 48px;
   }
 }

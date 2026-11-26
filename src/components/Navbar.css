@@ -4,7 +4,8 @@
   left: 0;
   right: 0;
   z-index: 2000;
-  height: var(--nav-height);
+  padding-top: env(safe-area-inset-top, 0px);
+  height: calc(var(--nav-height) + env(safe-area-inset-top, 0px));
   display: flex;
   align-items: center;
   background: rgba(0, 0, 0, 0.72);
@@ -126,7 +127,7 @@
 
 .nav-mobile-drawer {
   position: fixed;
-  top: var(--nav-height);
+  top: calc(var(--nav-height) + env(safe-area-inset-top, 0px));
   left: 0;
   right: 0;
   bottom: 0;
@@ -143,7 +144,7 @@
 .nav-mobile-panel {
   background: #060608;
   border-bottom: 1px solid var(--border-subtle);
-  padding: 20px clamp(20px, 5vw, 36px) 28px;
+  padding: 20px clamp(16px, 5vw, 36px) max(28px, env(safe-area-inset-bottom, 20px));
   display: flex;
   flex-direction: column;
   gap: 20px;

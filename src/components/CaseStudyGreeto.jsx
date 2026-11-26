@@ -6,7 +6,6 @@ import {
   ChevronRight,
   Expand,
   ImagePlus,
-  Layers,
   X,
 } from 'lucide-react';
 import { CaseStudyStickyHeader } from './CaseStudyPrimitives';
@@ -817,9 +816,9 @@ export default function CaseStudyGreeto({ onBack, onSelectCaseStudy }) {
               <span className="greeto-section-num">12 — FINAL DESIGN SHOWCASE</span>
               <h2 className="greeto-section-title">Unified system across every touchpoint.</h2>
               <p className="greeto-section-lead">
-                High-resolution desktop mockups pairing the primary Workspace Dashboard and
-                Workflow Builder with horizontal product galleries. Select any screen to inspect at
-                full scale.
+                High-resolution desktop mockups pairing the primary Workspace Dashboard with the
+                omnichannel 3-pane Conversations workspace. Select either screen to inspect at full
+                scale.
               </p>
             </div>
 
@@ -858,39 +857,6 @@ export default function CaseStudyGreeto({ onBack, onSelectCaseStudy }) {
                     )
                   }
                 />
-              </div>
-            </div>
-
-            {/* Horizontal Scrolling Showcase Rail */}
-            <div className="greeto-gallery-rail-wrap" data-reveal>
-              <div className="greeto-gallery-rail-label">
-                <Layers size={15} aria-hidden="true" />
-                <span>Horizontal Screen Gallery · Click any screen to expand</span>
-              </div>
-              <div className="greeto-gallery-rail">
-                {GREETO_SHOWCASE_GALLERY.map((item, idx) => (
-                  <article key={item.title} className="greeto-gallery-card">
-                    <ScreenFrame
-                      src={item.src}
-                      alt={item.title}
-                      onOpenLightbox={() =>
-                        openLightboxWithItems(
-                          GREETO_SHOWCASE_GALLERY.map((g) => ({
-                            src: g.src,
-                            alt: g.title,
-                            caption: `${g.category} — ${g.caption}`,
-                          })),
-                          idx
-                        )
-                      }
-                    />
-                    <div className="greeto-gallery-card-body">
-                      <span>{item.category}</span>
-                      <h4>{item.title}</h4>
-                      <p>{item.caption}</p>
-                    </div>
-                  </article>
-                ))}
               </div>
             </div>
           </div>

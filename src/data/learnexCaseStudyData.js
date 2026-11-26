@@ -6,7 +6,6 @@ export const LEARNEX_NAV_SECTIONS = [
   { id: 'learnex-tools', label: 'Study Tools' },
   { id: 'learnex-analytics', label: 'Performance' },
   { id: 'learnex-system', label: 'Design System' },
-  { id: 'learnex-showcase', label: 'Showcase' },
   { id: 'learnex-outcome', label: 'Outcome' },
 ];
 
@@ -641,7 +640,7 @@ export const LEARNEX_ALL_SHOWCASE = [
 ];
 
 export const LEARNEX_OUTCOME = {
-  sectionNumber: '19',
+  sectionNumber: '18',
   eyebrow: 'OUTCOME & LEARNINGS',
   heading: 'Designing analytical depth into an approachable daily study habit.',
   summary:

@@ -6,7 +6,6 @@ export const ACADLY_NAV_SECTIONS = [
   { id: 'acadly-courses', label: 'Courses' },
   { id: 'acadly-assessment', label: 'Assessment' },
   { id: 'acadly-system', label: 'Design System' },
-  { id: 'acadly-showcase', label: 'Showcase' },
   { id: 'acadly-outcome', label: 'Outcome' },
 ];
 
@@ -543,7 +542,7 @@ export const ACADLY_ALL_SCREENS = [
 ];
 
 export const ACADLY_OUTCOME = {
-  sectionNumber: '16',
+  sectionNumber: '15',
   eyebrow: 'OUTCOME & LEARNINGS',
   heading: 'Designing breadth without sacrificing mobile ease.',
   summary:

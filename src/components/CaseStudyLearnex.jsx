@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import {
   LEARNEX_AI,
-  LEARNEX_ALL_SHOWCASE,
   LEARNEX_CHALLENGE,
   LEARNEX_COMMUNITY,
   LEARNEX_CYCLE,
@@ -17,7 +16,6 @@ import {
   LEARNEX_PLANNING,
   LEARNEX_PRACTICE,
   LEARNEX_PREP_DASHBOARD,
-  LEARNEX_SHOWCASE_GROUPS,
   LEARNEX_SUPPORTING,
   LEARNEX_TEXTBOOK,
   LEARNEX_WORKSPACE,
@@ -32,7 +30,6 @@ import './CaseStudyLearnex.css';
 
 export default function CaseStudyLearnex({ onBack, onSelectCaseStudy }) {
   const [activePerfIdx, setActivePerfIdx] = useState(0);
-  const [activeShowcaseGroup, setActiveShowcaseGroup] = useState('all');
   const [lightboxItems, setLightboxItems] = useState([]);
   const [lightboxIndex, setLightboxIndex] = useState(-1);
 
@@ -52,11 +49,6 @@ export default function CaseStudyLearnex({ onBack, onSelectCaseStudy }) {
   );
 
   const currentPerf = LEARNEX_PERFORMANCE.highlights[activePerfIdx] || LEARNEX_PERFORMANCE.highlights[0];
-
-  const filteredShowcase =
-    activeShowcaseGroup === 'all'
-      ? LEARNEX_ALL_SHOWCASE
-      : LEARNEX_ALL_SHOWCASE.filter((item) => item.group === activeShowcaseGroup);
 
   return (
     <div className="cs2-shell learnex-shell">
@@ -706,61 +698,7 @@ export default function CaseStudyLearnex({ onBack, onSelectCaseStudy }) {
           </div>
         </section>
 
-        {/* SECTION 18 — FINAL DESIGN SHOWCASE */}
-        <section id="learnex-showcase" className="cs2-section cs2-anchor">
-          <div className="container">
-            <div className="cs2-section-head" data-reveal>
-              <span className="cs2-section-num">18 — FINAL DESIGN SHOWCASE</span>
-              <h2 className="cs2-section-title">Complete 62-screen Learnex product library.</h2>
-              <p className="cs2-section-lead">
-                Filter across functional modules, scroll vertically inside tall diagnostic pages, or
-                launch the zoomable lightbox to inspect every micro-interaction cleanly.
-              </p>
-            </div>
-
-            <div className="learnex-filter-bar" role="tablist" aria-label="Filter Learnex screens">
-              {LEARNEX_SHOWCASE_GROUPS.map((grp) => (
-                <button
-                  key={grp.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={activeShowcaseGroup === grp.id}
-                  className={`learnex-filter-pill ${activeShowcaseGroup === grp.id ? 'is-active' : ''}`}
-                  onClick={() => setActiveShowcaseGroup(grp.id)}
-                >
-                  {grp.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="learnex-four-grid" data-reveal>
-              {filteredShowcase.map((item, idx) => (
-                <article key={item.src} className="learnex-browser-card">
-                  <InteractiveViewportFrame
-                    src={item.src}
-                    alt={item.title}
-                    caption={item.title}
-                    variant={item.src.includes('canvas') ? 'natural' : 'browser'}
-                    urlLabel="app.learnex.edu"
-                    scrollable={!item.src.includes('canvas')}
-                    onOpenLightbox={() =>
-                      openGalleryLightbox(
-                        filteredShowcase.map((s) => ({
-                          src: s.src,
-                          alt: s.title,
-                          caption: s.title,
-                        })),
-                        idx
-                      )
-                    }
-                  />
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 19 — OUTCOME AND LEARNINGS */}
+        {/* SECTION 18 — OUTCOME AND LEARNINGS */}
         <section id="learnex-outcome" className="cs2-section cs2-anchor">
           <div className="container">
             <div className="cs2-section-head" data-reveal>

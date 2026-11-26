@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import {
-  ACADLY_ALL_SCREENS,
   ACADLY_ASSESSMENT,
   ACADLY_ASSIGNMENTS,
   ACADLY_CHALLENGE,
@@ -8,7 +7,6 @@ import {
   ACADLY_COURSES,
   ACADLY_DASHBOARD,
   ACADLY_DESIGN_SYSTEM,
-  ACADLY_FINAL_GROUPS,
   ACADLY_GAMIFICATION,
   ACADLY_HERO,
   ACADLY_JOURNEY,
@@ -30,7 +28,6 @@ import './CaseStudyAcadly.css';
 export default function CaseStudyAcadly({ onBack, onSelectCaseStudy }) {
   const [activeAssessmentIdx, setActiveAssessmentIdx] = useState(0);
   const [activeServiceGroup, setActiveServiceGroup] = useState('all');
-  const [activeShowcaseGroup, setActiveShowcaseGroup] = useState('all');
   const [lightboxItems, setLightboxItems] = useState([]);
   const [lightboxIndex, setLightboxIndex] = useState(-1);
 
@@ -58,11 +55,6 @@ export default function CaseStudyAcadly({ onBack, onSelectCaseStudy }) {
     activeServiceGroup === 'all'
       ? ACADLY_SELF_SERVICE.items
       : ACADLY_SELF_SERVICE.items.filter((item) => item.group === activeServiceGroup);
-
-  const filteredShowcase =
-    activeShowcaseGroup === 'all'
-      ? ACADLY_ALL_SCREENS
-      : ACADLY_ALL_SCREENS.filter((item) => item.group === activeShowcaseGroup);
 
   const currentAssessment =
     ACADLY_ASSESSMENT.steps[activeAssessmentIdx] || ACADLY_ASSESSMENT.steps[0];
@@ -654,60 +646,7 @@ export default function CaseStudyAcadly({ onBack, onSelectCaseStudy }) {
           </div>
         </section>
 
-        {/* SECTION 15 — FINAL DESIGN SHOWCASE */}
-        <section id="acadly-showcase" className="cs2-section cs2-anchor">
-          <div className="container">
-            <div className="cs2-section-head" data-reveal>
-              <span className="cs2-section-num">15 — FINAL DESIGN SHOWCASE</span>
-              <h2 className="cs2-section-title">All 43 Acadly screens, organized by workflow.</h2>
-              <p className="cs2-section-lead">
-                Filter across feature areas or scroll inside each mobile viewport. Click Expand on
-                any screen to inspect full-scale typography and spacing in the zoomable lightbox.
-              </p>
-            </div>
-
-            <div className="acadly-filter-bar" role="tablist" aria-label="Filter all Acadly screens">
-              {ACADLY_FINAL_GROUPS.map((grp) => (
-                <button
-                  key={grp.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={activeShowcaseGroup === grp.id}
-                  className={`acadly-filter-pill ${activeShowcaseGroup === grp.id ? 'is-active' : ''}`}
-                  onClick={() => setActiveShowcaseGroup(grp.id)}
-                >
-                  {grp.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="acadly-four-grid" data-reveal>
-              {filteredShowcase.map((item, idx) => (
-                <article key={item.src} className="acadly-gallery-tile">
-                  <InteractiveViewportFrame
-                    src={item.src}
-                    alt={item.title}
-                    caption={item.title}
-                    variant={item.src.includes('splash-screen') || item.src.includes('onboarding-screen') ? 'natural' : 'mobile'}
-                    scrollable={!(item.src.includes('splash-screen') || item.src.includes('onboarding-screen'))}
-                    onOpenLightbox={() =>
-                      openGalleryLightbox(
-                        filteredShowcase.map((s) => ({
-                          src: s.src,
-                          alt: s.title,
-                          caption: s.title,
-                        })),
-                        idx
-                      )
-                    }
-                  />
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 16 — OUTCOME AND LEARNINGS */}
+        {/* SECTION 15 — OUTCOME AND LEARNINGS */}
         <section id="acadly-outcome" className="cs2-section cs2-anchor">
           <div className="container">
             <div className="cs2-section-head" data-reveal>

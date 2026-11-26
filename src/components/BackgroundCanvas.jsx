@@ -32,9 +32,10 @@ export default function BackgroundCanvas() {
     const gridSpacing = 38;
     const lineSpacing = 76;
 
-    // Responsive particle density
+    // Responsive particle density (retains lightweight ambient drift on mobile without heavy density)
     const getParticleCount = (w) => {
-      if (prefersReduced || w < 768) return 0;
+      if (prefersReduced) return 0;
+      if (w < 768) return 12;
       if (w < 1024) return 18;
       return 38;
     };
@@ -135,7 +136,7 @@ export default function BackgroundCanvas() {
       }
     };
 
-    if (prefersReduced || isCoarsePointer || width < 768) {
+    if (prefersReduced) {
       drawStaticGrid();
     }
 
@@ -145,7 +146,7 @@ export default function BackgroundCanvas() {
         return;
       }
 
-      if (prefersReduced || isCoarsePointer || width < 768) {
+      if (prefersReduced) {
         drawStaticGrid();
         animId = null;
         return;
@@ -153,10 +154,14 @@ export default function BackgroundCanvas() {
 
       time += 0.016;
 
-      // Smooth cursor interpolation
-      mouse.x += (mouse.targetX - mouse.x) * 0.09;
-      mouse.y += (mouse.targetY - mouse.y) * 0.09;
-      mouse.opacity += (mouse.targetOpacity - mouse.opacity) * 0.07;
+      // Cursor spotlight & proximity interpolation (desktop fine pointers only)
+      if (!isCoarsePointer && width >= 768) {
+        mouse.x += (mouse.targetX - mouse.x) * 0.09;
+        mouse.y += (mouse.targetY - mouse.y) * 0.09;
+        mouse.opacity += (mouse.targetOpacity - mouse.opacity) * 0.07;
+      } else {
+        mouse.opacity = 0;
+      }
 
       if (spotlightEl) {
         spotlightEl.style.transform = `translate3d(${mouse.x}px, ${mouse.y}px, 0)`;
@@ -269,7 +274,7 @@ export default function BackgroundCanvas() {
 
     const onResize = () => {
       resize();
-      if (prefersReduced || isCoarsePointer || width < 768) {
+      if (prefersReduced) {
         drawStaticGrid();
       } else {
         startLoop();

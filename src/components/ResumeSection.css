@@ -154,27 +154,71 @@
   }
 }
 
-/* Mobile: stacked, non-sticky, large vertical character */
-@media (max-width: 767px) {
+/* Mobile: section heading -> avatar video -> summary -> experience -> education -> CTAs */
+@media (max-width: 768px) {
   .resume-section {
     min-height: auto;
   }
 
   .resume-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .resume-visual-col {
-    position: static;
-  }
-
-  .resume-vertical-stage {
-    width: min(100%, 360px);
-    max-height: 76svh;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
   .resume-content-col {
-    padding: 0;
+    display: contents;
+  }
+
+  .resume-content-col > .scene-kicker {
+    order: 1;
+    margin-bottom: 10px;
+  }
+
+  .resume-content-col > .scene-heading {
+    order: 2;
+    margin-bottom: 24px;
+  }
+
+  .resume-visual-col {
+    order: 3;
+    position: static;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .resume-vertical-stage {
+    width: min(100%, 300px, calc(66svh * 9 / 16));
+    max-height: none;
+  }
+
+  .resume-summary {
+    order: 4;
+    margin-top: 0;
+    font-size: 1rem;
+  }
+
+  .resume-block {
+    order: 5;
+    width: 100%;
+    margin-top: 28px;
+  }
+
+  .resume-cta-row {
+    order: 7;
+    width: 100%;
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 413px) {
+  .resume-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .resume-cta-row .btn-primary,
+  .resume-cta-row .btn-secondary {
+    width: 100%;
   }
 }

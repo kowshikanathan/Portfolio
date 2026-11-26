@@ -55,20 +55,25 @@ export default function ScrollManager({ routeKey }) {
         );
       });
 
-      const parallaxItems = gsap.utils.toArray('[data-parallax]');
-      parallaxItems.forEach((el) => {
-        const yOffset = Number(el.getAttribute('data-parallax') || -24);
-        gsap.to(el, {
-          y: yOffset,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
+      const isTouchOrMobile =
+        window.matchMedia?.('(pointer: coarse)').matches || window.innerWidth <= 768;
+
+      if (!isTouchOrMobile) {
+        const parallaxItems = gsap.utils.toArray('[data-parallax]');
+        parallaxItems.forEach((el) => {
+          const yOffset = Number(el.getAttribute('data-parallax') || -24);
+          gsap.to(el, {
+            y: yOffset,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+            },
+          });
         });
-      });
+      }
     });
 
     return () => {
